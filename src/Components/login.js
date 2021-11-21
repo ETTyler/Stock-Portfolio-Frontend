@@ -13,34 +13,50 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { BrowserRouter as Router,
-  Routes, Route
-} from "react-router-dom"
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const theme = createTheme();
-const url = 'http://localhost:3001/api/users/login'
-
 
 export default function SignIn() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [invalidDetails, setInvalidDetails] = useState(false)
+ 
   if (isLoggedIn) {
     return <Navigate to='/home'/>
+  }
+
+  const LoginAlert = ({ invalidDetails }) => {
+    if (invalidDetails === false) {
+      return null
+    }
+    return (
+      <Alert variant="outlined" severity="error">
+          Incorrect Email or Password. Please Try Again
+      </Alert>
+    )
+
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const url = 'http://localhost:3001/api/users/login'
     const userData = {
       email: data.get('email'),
       password: data.get('password'),
     }
-    console.log(userData)
     axios.post(url, userData)
       .then(res => { 
         if(res.data) {
           setIsLoggedIn(true)
+        }
+        else {
+          setInvalidDetails(true)
         }
       })
       .catch(err => console.log(err.data))
@@ -111,6 +127,9 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
+        <Stack mt={1}>
+          <LoginAlert invalidDetails={invalidDetails}/>
+        </Stack>
       </Container>
     </ThemeProvider>
   );
