@@ -5,24 +5,26 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import SignIn from './Components/login';
-import Navbar from './Components/navbar';
+import SignIn from './login';
 import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
 } from "react-router-dom"
 
-const App = () => {  
-  const { pathname } = useLocation();
-  return (
-    <div> 
-     {pathname === '/login' ? null : <Navbar />}
-     <Routes>
-      <Route path="/login" element={<SignIn />}/>
-    </Routes>
-    </div>
+const Navbar = () => {
+  const padding = {
+    padding: 5
+  }
 
+  return (
+    <>
+      <div>
+        <Link style={padding} to="/login">home</Link>
+        <Link style={padding} to="/login">notes</Link>
+        <Link style={padding} to="/">users</Link>
+      </div>
+      
+    </>
   )
 }
-
-export default App;
+export default Navbar;
