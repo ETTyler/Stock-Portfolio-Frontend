@@ -27,7 +27,7 @@ export default function SignIn() {
   const [invalidDetails, setInvalidDetails] = useState(false)
  
   if (isLoggedIn) {
-    return <Navigate to='/home'/>
+    return <Navigate to='/portfolio'/>
   }
 
   const LoginAlert = ({ invalidDetails }) => {
@@ -39,7 +39,6 @@ export default function SignIn() {
           Incorrect Email or Password. Please Try Again
       </Alert>
     )
-
   }
 
   const handleSubmit = (event) => {
@@ -52,8 +51,9 @@ export default function SignIn() {
     }
     axios.post(url, userData)
       .then(res => { 
-        if(res.data) {
+        if(res.data.status === true) {
           setIsLoggedIn(true)
+          localStorage.setItem('token', res.data.token)
         }
         else {
           setInvalidDetails(true)
@@ -126,11 +126,11 @@ export default function SignIn() {
                 </Link>
               </Grid>
             </Grid>
-          </Box>
-        </Box>
         <Stack mt={1}>
           <LoginAlert invalidDetails={invalidDetails}/>
         </Stack>
+          </Box>
+        </Box>
       </Container>
     </ThemeProvider>
   );
