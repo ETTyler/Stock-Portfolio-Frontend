@@ -9,6 +9,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import SignIn from './Components/login';
 import Navbar from './Components/navbar';
+import Portfolio from './Components/Portfolio/portfolio';
 import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
@@ -30,10 +31,12 @@ const App = () => {
 
   return (
     <div> 
-     {pathname === '/login' ? clearToken() : <Navbar username={decodedToken.name}/>}
-     <Routes>
-      <Route path="/login" element={<SignIn />}/>
-    </Routes>
+      {pathname === '/login' || pathname === '/' ? clearToken() : <Navbar username={decodedToken.name}/>}
+      <Routes>
+        <Route path="/" element={<SignIn />}/>
+        <Route path="/login" element={<SignIn />}/>
+        <Route path="/portfolio" element={<Portfolio />}/>
+      </Routes>
     </div>
   )
 }
