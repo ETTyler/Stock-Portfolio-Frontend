@@ -11,23 +11,23 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import { useState } from 'react';
 import PortfolioValue from './portfolioValue';
+import Stock from './Stock';
+import AddIcon from '@mui/icons-material/Add';
 
 
 const Portfolio = () => {
-  const [upDown, setUpDown] = useState(Boolean)
   
   return (
     <Box sx={{ flexGrow: 1, mt: "2rem" }}>
       <Grid container textAlign="center" >
-        <Grid item xs>
-          <Button size="medium" variant="outlined">Add New</Button>
-        </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <CenterBox>
             <PortfolioValue/>
           </CenterBox>
         </Grid>
-        <Grid item xs>
+        <Grid item xs={12} sx={{ mt: "2rem"}}>
+          <Button size="medium" variant="outlined" startIcon={<AddIcon />} sx={{mr: 54}}>Add New</Button>
+          <Stock />
         </Grid>
       </Grid>
     </Box>

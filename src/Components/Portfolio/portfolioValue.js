@@ -19,9 +19,9 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
     return(
       <>
         <Typography variant="h3">
-          £{portfolioValue.toLocaleString()} <ArrowUpwardIcon fontSize='large' sx={{color: "greenyellow"}}/>
+          £{portfolioValue.toLocaleString()} <ArrowUpwardIcon fontSize='large' sx={{color: "#3fcc6f"}}/>
         </Typography>
-        <Typography variant="body1" sx={{color: "greenyellow"}}>
+        <Typography variant="body1" sx={{color: "#3fcc6f"}}>
           Up by £{portfolioDifference.toLocaleString()}
         </Typography>
       </>
@@ -30,9 +30,9 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
   return (
     <>
       <Typography variant="h3">
-        £{portfolioValue.toLocaleString()} <ArrowDownwardSharpIcon fontSize='large' sx={{color: "red"}}/>
+        £{portfolioValue.toLocaleString()} <ArrowDownwardSharpIcon fontSize='large' sx={{color: "#fd6e70"}}/>
       </Typography>
-      <Typography variant="body1" sx={{color: "red"}}>
+      <Typography variant="body1" sx={{color: "#fd6e70"}}>
         Down by £{Math.abs(portfolioDifference).toLocaleString()}
       </Typography>
     </>
@@ -42,10 +42,10 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
 const PortfolioValue = () => {
   return (
     <Card sx={{ width: "auto", height: "auto", p: 2, px: 8}}>
-    <CardContent>
-      <SetColours portfolioDifference={portfolioDifference} portfolioValue={portfolioValue}/>
-    </CardContent>
-  </Card>
+      <CardContent>
+        <SetColours portfolioDifference={portfolioDifference} portfolioValue={portfolioValue}/>
+      </CardContent>
+    </Card>
   )
 }
 
