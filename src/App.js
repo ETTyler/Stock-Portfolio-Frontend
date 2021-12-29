@@ -7,6 +7,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import SignIn from './Components/login';
 import Navbar from './Components/navbar';
 import Portfolio from './Components/Portfolio/portfolio';
@@ -14,6 +15,14 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
 } from "react-router-dom"
+
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: 'Inter',
+    },
+  },
+})
 
 const App = () => {  
   const { pathname } = useLocation()
@@ -30,14 +39,14 @@ const App = () => {
   const decodedToken = jwt_decode(token)
 
   return (
-    <div> 
+    <ThemeProvider theme={theme}> 
       {pathname === '/login' || pathname === '/' ? clearToken() : <Navbar username={decodedToken.name}/>}
       <Routes>
         <Route path="/" element={<SignIn />}/>
         <Route path="/login" element={<SignIn />}/>
         <Route path="/portfolio" element={<Portfolio />}/>
       </Routes>
-    </div>
+    </ThemeProvider>
   )
 }
 

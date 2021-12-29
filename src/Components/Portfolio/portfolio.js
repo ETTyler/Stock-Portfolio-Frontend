@@ -26,7 +26,11 @@ const Portfolio = () => {
           </CenterBox>
         </Grid>
         <Grid item xs={12} sx={{ mt: "2rem"}}>
-          <Button size="medium" variant="outlined" startIcon={<AddIcon />} sx={{mr: 54}}>Add New</Button>
+          <Button size="medium" variant="outlined" startIcon={<AddIcon />} sx={{mr: '26.5rem'}}>Add New</Button>
+          <Stock />
+          <Stock />
+          <Stock />
+          <Stock />
           <Stock />
         </Grid>
       </Grid>

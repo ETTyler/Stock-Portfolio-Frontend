@@ -11,6 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
@@ -20,15 +23,18 @@ import {
 const pages = [
   [
     'Portfolio',
-    '/portfolio'
+    '/portfolio',
+    0
   ],
   [
     'Statistics',
-    '/statistics'
+    '/statistics',
+    1
   ],
   [
     'Analytics',
-    '/analytics'
+    '/analytics',
+    2
   ]
 ]
 
@@ -47,9 +53,23 @@ const settings = [
   ]
 ]
 
+
 const Navbar = ({ username }) => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const { pathname } = useLocation()
+
+  const setThis = (path) => {
+    if (path === '/portfolio') {
+      return 0
+    }
+    if (path === '/statistics') {
+      return 1
+    }
+    if (path === '/analytics') {
+      return 2
+    }
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -64,6 +84,12 @@ const Navbar = ({ username }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const [value, setValue] = useState(setThis(pathname));
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -100,24 +126,33 @@ const Navbar = ({ username }) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} component={Link} to={page[1]}>
+                <MenuItem  key={page} onClick={handleCloseNavMenu} component={Link} to={page[1]}>
                   <Typography textAlign="center">{page[0]}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Tabs
+            onChange={(e, v) => setValue(v)}
+            value={value}
+            aria-label="Navigation Tabs"
+            textColor="inherit"
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "white",
+                height: '0.15rem'
+              }
+            }}
+          >
             {pages.map((page) => (
-              <Button
+              <Tab label={page[0]} 
                 component={Link} 
-                to={page[1]}
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, mr: 6, color: 'white', display: 'block' }}
-              >
-                {page[0]}
-              </Button>
+                to={page[1]} 
+                key={page} 
+                sx={{mx: 3}}/>
             ))}
+          </Tabs>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
