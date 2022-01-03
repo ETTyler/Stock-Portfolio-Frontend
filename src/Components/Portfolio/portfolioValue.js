@@ -11,7 +11,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import { useState } from 'react';
 
-const portfolioValue = 10033.23
+const portfolioValue = 10033.00
 const portfolioDifference = -2234.03
 
 const SetColours = ({portfolioDifference, portfolioValue}) => {
@@ -19,10 +19,16 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
     return(
       <>
         <Typography variant="h3">
-          £{portfolioValue.toLocaleString()} <ArrowUpwardIcon fontSize='large' sx={{color: "#3fcc6f"}}/>
+          {portfolioValue.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'GBP',
+          })} <ArrowUpwardIcon fontSize='large' sx={{color: "#3fcc6f"}}/>
         </Typography>
         <Typography variant="body1" sx={{color: "#3fcc6f"}}>
-          Up by £{portfolioDifference.toLocaleString()}
+          Up by {portfolioDifference.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'GBP',
+          })}
         </Typography>
       </>
     )
@@ -30,10 +36,16 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
   return (
     <>
       <Typography variant="h3">
-        £{portfolioValue.toLocaleString()} <ArrowDownwardSharpIcon fontSize='large' sx={{color: "#fd6e70"}}/>
+        {portfolioValue.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'GBP',
+        })} <ArrowDownwardSharpIcon fontSize='large' sx={{color: "#fd6e70"}}/>
       </Typography>
       <Typography variant="body1" sx={{color: "#fd6e70"}}>
-        Down by £{Math.abs(portfolioDifference).toLocaleString()}
+        Down by {Math.abs(portfolioDifference).toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'GBP',
+        })}
       </Typography>
     </>
   )

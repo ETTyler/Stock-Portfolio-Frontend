@@ -9,32 +9,56 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import Container from '@mui/material/Container';
 import ContactlessSharpIcon from '@mui/icons-material/ContactlessSharp';
+import axios from 'axios';
+
+const stockSite = "apple.com" 
+const ticker = "AAPL"
+const key = "2763b31a6eb31c17f34d03159506b46c"
+const shares = 33
 
 const Stock = () => {
+
+  const [stockData, setStockData] = useState([])
+  const [stockPrice, setStockPrice] = useState(0)
+  const [stockName, setStockName] = useState()
+  
+  useEffect(() => {
+    axios
+      .get(`https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=${key}`)
+      .then(response => {
+        setStockData(response.data)
+        setStockPrice(response.data[0].price*shares)
+        setStockName(response.data[0].name)
+      })
+  }, [])
+
   return (
     <Container maxWidth="sm">
       <View>
         <Card sx={{ display: 'flex', alignItems: 'center', p: 0, px: 0}}>
           <CardContent sx={{ flex: '0 1 auto', display: 'flex' }}>
-            <ContactlessSharpIcon fontSize="large"/>
+            <img sx={{borderRadius: '10%'}} src={`//logo.clearbit.com/${stockSite}?size=45`}></img>
           </CardContent>
           <CardContent sx={{ flex: '20 1 auto', display: 'flex', justifyItems: "flex-start"}}>
             <FlexStock>
             <Typography component="div" variant="h5">
-              Apple 
+              {stockName} 
             </Typography>
             <Typography component="div" variant="body">
-              5 shares
+              {shares} shares
             </Typography>
             </FlexStock>
           </CardContent>
           <CardContent sx={{ flex: '0 1 auto'}}>
             <FlexPrice>
             <Typography component="div" variant="h5">
-              £12,077.32
+              {stockPrice.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'GBP',
+              })}
             </Typography>
             <Typography component="div" variant="body" sx={{color: '#3fcc6f' }}>
               +12.45%
