@@ -126,7 +126,7 @@ const Navbar = ({ username }) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem  key={page} onClick={handleCloseNavMenu} component={Link} to={page[1]}>
+                <MenuItem key={page} onClick={handleCloseNavMenu} component={Link} to={page[1]}>
                   <Typography textAlign="center">{page[0]}</Typography>
                 </MenuItem>
               ))}

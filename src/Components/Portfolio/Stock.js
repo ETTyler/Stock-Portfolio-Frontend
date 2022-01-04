@@ -14,17 +14,13 @@ import Container from '@mui/material/Container';
 import ContactlessSharpIcon from '@mui/icons-material/ContactlessSharp';
 import axios from 'axios';
 
-const stockSite = "apple.com" 
-const ticker = "AAPL"
+
 const key = "2763b31a6eb31c17f34d03159506b46c"
-const shares = 33
 
-const Stock = () => {
+const Stock = ( { data } ) => {
+  const stockValue = Number(data.Value)
 
-  const [stockData, setStockData] = useState([])
-  const [stockPrice, setStockPrice] = useState(0)
-  const [stockName, setStockName] = useState()
-  
+  /*
   useEffect(() => {
     axios
       .get(`https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=${key}`)
@@ -34,28 +30,29 @@ const Stock = () => {
         setStockName(response.data[0].name)
       })
   }, [])
+  */
 
   return (
     <Container maxWidth="sm">
       <View>
         <Card sx={{ display: 'flex', alignItems: 'center', p: 0, px: 0}}>
           <CardContent sx={{ flex: '0 1 auto', display: 'flex' }}>
-            <img sx={{borderRadius: '10%'}} src={`//logo.clearbit.com/${stockSite}?size=45`}></img>
+            <img sx={{borderRadius: '10%'}} src={`${data.LogoURL}?size=45`}></img>
           </CardContent>
           <CardContent sx={{ flex: '20 1 auto', display: 'flex', justifyItems: "flex-start"}}>
             <FlexStock>
             <Typography component="div" variant="h5">
-              {stockName} 
+              {data.Name} 
             </Typography>
             <Typography component="div" variant="body">
-              {shares} shares
+              {data.Shares} shares
             </Typography>
             </FlexStock>
           </CardContent>
           <CardContent sx={{ flex: '0 1 auto'}}>
             <FlexPrice>
             <Typography component="div" variant="h5">
-              {stockPrice.toLocaleString('en-US', {
+              {stockValue.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'GBP',
               })}
