@@ -11,8 +11,6 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import { useState } from 'react';
 
-const portfolioDifference = 44
-
 const SetColours = ({portfolioDifference, portfolioValue}) => {
   if (portfolioDifference > 0) {
     return(
@@ -51,14 +49,18 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
 }
 
 const PortfolioValue = ( {data} ) => {
-  console.log(data)
+
   const portfolioValue = data.reduce((total, stock) => 
     total + Number(stock.Value), 0
   )
+  const originalValue = data.reduce((total, stock) => 
+    total + Number(stock.PriceBought*stock.Shares), 0
+  )
+  
   return (
     <Card sx={{ width: "auto", height: "auto", p: 2, px: 8}}>
       <CardContent>
-        <SetColours portfolioDifference={portfolioDifference} portfolioValue={portfolioValue}/>
+        <SetColours portfolioDifference={portfolioValue-originalValue} portfolioValue={portfolioValue}/>
       </CardContent>
     </Card>
   )

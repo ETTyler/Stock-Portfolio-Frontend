@@ -23,13 +23,19 @@ const Portfolio = () => {
 
   const token = localStorage.getItem('token')
   const decodedToken = jwt_decode(token)
-  console.log(decodedToken)
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/stocks/update`)
+      .then(response => {
+        console.log(response.data)
+      })
+  }, [])
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/stocks/info/${decodedToken.id}`)
       .then(response => {
-        console.log(response.data)
         setStockData(response.data)
         setLoading(false)
       })

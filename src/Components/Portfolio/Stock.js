@@ -14,23 +14,29 @@ import Container from '@mui/material/Container';
 import ContactlessSharpIcon from '@mui/icons-material/ContactlessSharp';
 import axios from 'axios';
 
-
-const key = "2763b31a6eb31c17f34d03159506b46c"
+const SetColours = ({percentageChange}) => {
+  if (percentageChange > 0) {
+    return(
+      <>
+        <Typography component="div" variant="body" sx={{color: '#3fcc6f' }}>
+          +{percentageChange}%
+        </Typography>
+      </>
+    )
+  }
+  return (
+    <>
+      <Typography component="div" variant="body" sx={{color: '#fd6e70' }}>
+        {percentageChange}%
+      </Typography>
+    </>
+  )
+}
 
 const Stock = ( { data } ) => {
   const stockValue = Number(data.Value)
-
-  /*
-  useEffect(() => {
-    axios
-      .get(`https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=${key}`)
-      .then(response => {
-        setStockData(response.data)
-        setStockPrice(response.data[0].price*shares)
-        setStockName(response.data[0].name)
-      })
-  }, [])
-  */
+  const originalValue = Number(data.Shares*data.PriceBought)
+  const percentageChange = (((stockValue - originalValue) / originalValue) * 100).toFixed(2)
 
   return (
     <Container maxWidth="sm">
@@ -41,25 +47,23 @@ const Stock = ( { data } ) => {
           </CardContent>
           <CardContent sx={{ flex: '20 1 auto', display: 'flex', justifyItems: "flex-start"}}>
             <FlexStock>
-            <Typography component="div" variant="h5">
-              {data.Name} 
-            </Typography>
-            <Typography component="div" variant="body">
-              {data.Shares} shares
-            </Typography>
+              <Typography component="div" variant="h5">
+                {data.Name} 
+              </Typography>
+              <Typography component="div" variant="body">
+                ${data.Ticker} - {data.Shares} Shares
+              </Typography>
             </FlexStock>
           </CardContent>
           <CardContent sx={{ flex: '0 1 auto'}}>
             <FlexPrice>
-            <Typography component="div" variant="h5">
-              {stockValue.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'GBP',
-              })}
-            </Typography>
-            <Typography component="div" variant="body" sx={{color: '#3fcc6f' }}>
-              +12.45%
-            </Typography>
+              <Typography component="div" variant="h6">
+                {stockValue.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'GBP',
+                })}
+              </Typography>
+              <SetColours percentageChange={percentageChange} />
             </FlexPrice>
           </CardContent>
           <CardContent sx={{ flex: '0 1 auto', '.MuiCardContent-root&:last-child': {
