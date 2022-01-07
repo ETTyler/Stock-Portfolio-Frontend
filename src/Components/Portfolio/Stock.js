@@ -18,7 +18,7 @@ const SetColours = ({percentageChange}) => {
   if (percentageChange > 0) {
     return(
       <>
-        <Typography component="div" variant="body" sx={{color: '#3fcc6f' }}>
+        <Typography component="div" variant="body" sx={{color: '#3fcc6f', display: 'flex', justifyContent: 'flex-end' }}>
           +{percentageChange}%
         </Typography>
       </>
@@ -26,7 +26,7 @@ const SetColours = ({percentageChange}) => {
   }
   return (
     <>
-      <Typography component="div" variant="body" sx={{color: '#fd6e70' }}>
+      <Typography component="div" variant="body" sx={{color: '#fd6e70', display: 'flex', justifyContent: 'flex-end' }}>
         {percentageChange}%
       </Typography>
     </>
@@ -60,7 +60,7 @@ const Stock = ( { data } ) => {
               <Typography component="div" variant="h6">
                 {stockValue.toLocaleString('en-US', {
                   style: 'currency',
-                  currency: 'GBP',
+                  currency: 'USD',
                 })}
               </Typography>
               <SetColours percentageChange={percentageChange} />

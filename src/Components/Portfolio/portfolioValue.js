@@ -18,13 +18,13 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
         <Typography variant="h3">
           {portfolioValue.toLocaleString('en-US', {
             style: 'currency',
-            currency: 'GBP',
+            currency: 'USD',
           })} <ArrowUpwardIcon fontSize='large' sx={{color: "#3fcc6f"}}/>
         </Typography>
         <Typography variant="body1" sx={{color: "#3fcc6f"}}>
           Up by {portfolioDifference.toLocaleString('en-US', {
             style: 'currency',
-            currency: 'GBP',
+            currency: 'USD',
           })}
         </Typography>
       </>
@@ -35,13 +35,13 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
       <Typography variant="h3">
         {portfolioValue.toLocaleString('en-US', {
           style: 'currency',
-          currency: 'GBP',
+          currency: 'USD',
         })} <ArrowDownwardSharpIcon fontSize='large' sx={{color: "#fd6e70"}}/>
       </Typography>
       <Typography variant="body1" sx={{color: "#fd6e70"}}>
         Down by {Math.abs(portfolioDifference).toLocaleString('en-US', {
           style: 'currency',
-          currency: 'GBP',
+          currency: 'USD',
         })}
       </Typography>
     </>
