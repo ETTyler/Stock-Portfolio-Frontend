@@ -28,7 +28,7 @@ const Portfolio = () => {
     axios
       .get(`http://localhost:3001/api/stocks/update`)
       .then(response => {
-        console.log(response.data)
+        setLoading(false)
       })
   }, [])
 
@@ -37,7 +37,6 @@ const Portfolio = () => {
       .get(`http://localhost:3001/api/stocks/info/${decodedToken.id}`)
       .then(response => {
         setStockData(response.data)
-        setLoading(false)
       })
   }, [])
 
