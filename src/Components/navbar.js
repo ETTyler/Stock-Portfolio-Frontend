@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
@@ -93,7 +92,7 @@ const Navbar = ({ username }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{boxSizing: 'border-box'}}>
       <Container maxWidth="1">
         <Toolbar disableGutters>          
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

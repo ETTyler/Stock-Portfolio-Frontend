@@ -51,10 +51,10 @@ const SetColours = ({portfolioDifference, portfolioValue}) => {
 const PortfolioValue = ( {data} ) => {
 
   const portfolioValue = data.reduce((total, stock) => 
-    total + Number(stock.Value), 0
+    total + Number(stock.value), 0
   )
   const originalValue = data.reduce((total, stock) => 
-    total + Number(stock.PriceBought*stock.Shares), 0
+    total + Number(stock.priceBought*stock.shares), 0
   )
   
   return (

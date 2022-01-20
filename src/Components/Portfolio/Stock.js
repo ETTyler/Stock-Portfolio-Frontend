@@ -34,8 +34,8 @@ const SetColours = ({percentageChange}) => {
 }
 
 const Stock = ( { data } ) => {
-  const stockValue = Number(data.Value)
-  const originalValue = Number(data.Shares*data.PriceBought)
+  const stockValue = Number(data.value)
+  const originalValue = Number(data.shares*data.priceBought)
   const percentageChange = (((stockValue - originalValue) / originalValue) * 100).toFixed(2)
 
   return (
@@ -51,7 +51,7 @@ const Stock = ( { data } ) => {
                 {data.Name} 
               </Typography>
               <Typography component="div" variant="body">
-                ${data.Ticker} - {data.Shares} Shares
+                ${data.ticker} - {data.shares} Shares
               </Typography>
             </FlexStock>
           </CardContent>
@@ -81,7 +81,6 @@ export default Stock;
 const View = styled.div`
   padding-top: 3%;
 `
-
 const FlexStock = styled.div`
   display: flex;
   flex-direction: column;
