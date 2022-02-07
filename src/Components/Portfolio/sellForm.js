@@ -22,65 +22,47 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import jwt_decode from "jwt-decode";
 
-const BuyForm = ({ handleClose }) => {
-  const [stocks, setStocks] = useState([])
-  const [value, setValue] = useState(null)
-  const [stockName, setStockName] = useState([])
+const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
+  const [date, setDate] = useState(null)
   
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/stocks/info`)
-      .then(response => {
-        setStocks(response.data)
-      })
-  }, [])
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const token = localStorage.getItem('token')
-    const decodedToken = jwt_decode(token)
 
-    const url = `http://localhost:3001/api/purchases/new/`
+    const url = `http://localhost:3001/api/sale/new`
     const userData = {
-      userID: decodedToken.id,
-      ticker: stockName.ticker,
-      date: value,
-      price: data.get('price'),
-      shares: data.get('shares')
+      transactionID: stockData.transactionID,
+      saleDate: date,
+      salePrice: data.get('price'),
+      sharesSold: data.get('shares'),
+      value: stockData.value,
+      shares: stockData.shares
     }
     console.log(userData)
     axios.post(url, userData)
       .then(res => { 
+        console.log(res)
+        setIsUpdated(true)
         handleClose()
       })
       .catch(err => console.log(err.data))
   }
-
+  
     return (
       <div>
       <form onSubmit={handleSubmit}>
-        <Autocomplete
-          id="stock"
-          name="stock"
-          label="stock"
-          options={stocks}
-          renderInput={(params) => <TextField {...params} label="Stock" />}
-          style={{marginBottom: "5%"}}
-          onChange={(event, value) => setStockName(value)}
-        />
-        <TextField name="shares" label="Shares" variant="standard" fullWidth style={{marginBottom: "5%"}} />
+        <TextField name="shares" label="Shares Sold" variant="standard" fullWidth style={{marginBottom: "5%"}} />
         <br/>
-        <TextField name="price" label="Price Bought At" variant="standard" fullWidth style={{marginBottom: "5%"}}
+        <TextField name="price" label="Price Sold At" variant="standard" fullWidth style={{marginBottom: "5%"}}
         />
         <div style={{marginBottom: "5%"}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
-            label="Date Bought"
+            label="Date Sold"
             name="date"
-            value={value}
+            value={date}
             onChange={(newValue) => {
-              setValue(newValue);
+              setDate(newValue);
             }}
             renderInput={(params) => <TextField {...params} />}
           />
@@ -91,8 +73,7 @@ const BuyForm = ({ handleClose }) => {
         </Button>
       </form>
       </div>
-    )
-};
+    )   
+}
 
-export default BuyForm;
-
+export default SellForm;

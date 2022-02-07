@@ -13,6 +13,22 @@ import { useState, useEffect} from 'react';
 import Container from '@mui/material/Container';
 import ContactlessSharpIcon from '@mui/icons-material/ContactlessSharp';
 import axios from 'axios';
+import Modal from '@mui/material/Modal';
+import SellForm from './sellForm';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '20rem',
+  bgcolor: 'background.paper',
+  border: '2px solid #1976d2',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: '5%'
+};
+
 
 const SetColours = ({percentageChange}) => {
   if (percentageChange > 0) {
@@ -33,10 +49,19 @@ const SetColours = ({percentageChange}) => {
   )
 }
 
-const Stock = ( { data } ) => {
+const Stock = ( { data, setIsUpdated } ) => {
   const stockValue = Number(data.value)
   const originalValue = Number(data.shares*data.priceBought)
   const percentageChange = (((stockValue - originalValue) / originalValue) * 100).toFixed(2)
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+
 
   return (
     <Container maxWidth="sm">
@@ -66,9 +91,21 @@ const Stock = ( { data } ) => {
               <SetColours percentageChange={percentageChange} />
             </FlexPrice>
           </CardContent>
-          <CardContent sx={{ flex: '0 1 auto', '.MuiCardContent-root&:last-child': {
-            'padding-bottom': 15}}}>
-            <Button size="medium" variant="outlined">Sell</Button>
+          <CardContent sx={{ flex: '0 1 auto', '.MuiCardContent-root&:last-child': {'padding-bottom': 15}}}>
+            <Button size="medium" onClick={handleOpen} variant="outlined">Sell</Button>
+            <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Sell Stock
+              </Typography>
+              <SellForm stockData={data} handleClose={handleClose} setIsUpdated={setIsUpdated}/>
+            </Box>
+          </Modal>
           </CardContent>
         </Card>
       </View>

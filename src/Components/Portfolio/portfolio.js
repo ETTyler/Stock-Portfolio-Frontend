@@ -23,7 +23,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '30rem',
+  width: '20rem',
   bgcolor: 'background.paper',
   border: '2px solid #1976d2',
   boxShadow: 24,
@@ -32,17 +32,17 @@ const style = {
 };
 
 const Portfolio = () => {
-
   const [stockData, setStockData] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [isUpdated, setIsUpdated] = useState(false)
   const [open, setOpen] = useState(false);
   
   const handleOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const token = localStorage.getItem('token')
   const decodedToken = jwt_decode(token)
@@ -55,8 +55,9 @@ const Portfolio = () => {
     .then(axios.spread((res1, res2) => {
       setStockData(res2.data)
       setLoading(false)
+      setIsUpdated(false)
     }))
-  }, [])
+  }, [isUpdated])
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -71,7 +72,7 @@ const Portfolio = () => {
           </CenterBox>
         </Grid>
         <Grid item xs={12} sx={{ mt: "2rem" }}>
-          <Button onClick={handleOpen} size="medium" variant="outlined" startIcon={<AddIcon />} sx={{mr: '26.5rem'}}>Add New</Button>
+          <Button onClick={handleOpen} size="medium" variant="outlined" startIcon={<AddIcon />} sx={{}}>Add New</Button>
           <Modal
             open={open}
             onClose={handleClose}
@@ -82,11 +83,11 @@ const Portfolio = () => {
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Add New Stock Purchase
               </Typography>
-              <BuyForm />
+              <BuyForm handleClose={handleClose}/>
             </Box>
           </Modal>
           {stockData.map((stock) => (
-            <Stock key={stock.ticker} data={stock}/>
+            <Stock key={stock.transationID} data={stock} setIsUpdated={setIsUpdated}/>
           ))}
         </Grid>
       </Grid>
