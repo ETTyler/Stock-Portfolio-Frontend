@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import jwt_decode from "jwt-decode";
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import SignIn from './Components/login';
 import Navbar from './Components/navbar';
 import Portfolio from './Components/Portfolio/portfolio';
@@ -12,13 +12,14 @@ import {
   Routes, Route, Link, useLocation
 } from "react-router-dom"
 
-const theme = createTheme({
+let theme = createTheme({
   typography: {
     allVariants: {
       fontFamily: 'Inter',
     },
   },
 })
+theme = responsiveFontSizes(theme)
 
 const App = () => {  
   const { pathname } = useLocation()

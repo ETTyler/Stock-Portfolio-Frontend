@@ -27,7 +27,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #1976d2',
   boxShadow: 24,
-  p: 5,
+  p: 3,
   borderRadius: '5%'
 };
 
@@ -71,7 +71,7 @@ const Portfolio = () => {
             <PortfolioValue data={stockData}/>
           </CenterBox>
         </Grid>
-        <Grid item xs={12} sx={{ mt: "2rem" }}>
+        <Grid item xs={12} sx={{ mt: "1rem" }}>
           <Button onClick={handleOpen} size="medium" variant="outlined" startIcon={<AddIcon />} sx={{}}>Add New</Button>
           <Modal
             open={open}

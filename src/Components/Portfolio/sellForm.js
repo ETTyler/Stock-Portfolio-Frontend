@@ -22,6 +22,23 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import jwt_decode from "jwt-decode";
 
+const style = {
+  position: 'relative',
+  boxSizing: 'borderBox',
+  background: 'white',
+  color: '#3f51b5',
+  border: '1px solid rgba(63, 81, 181, 0.5)',
+  minWidth: '64px',
+  height: '2.2rem',
+  width: '100%',
+  borderRadius: '4px',
+  textTransform: 'uppercase',
+  verticalAlign: 'middle',
+  fontFamily: 'Inter',
+  fontSize: '0.875rem',
+  cursor: 'pointer'
+}
+
 const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
   const [date, setDate] = useState(null)
   
@@ -68,9 +85,7 @@ const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
           />
         </LocalizationProvider>
         </div>
-        <Button color="primary" variant="outlined" fullWidth type="submit">
-          Submit
-        </Button>
+        <input type="submit" value="Submit" style={style}/>
       </form>
       </div>
     )   
