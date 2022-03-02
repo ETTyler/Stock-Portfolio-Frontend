@@ -11,6 +11,7 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
 } from "react-router-dom"
+import Statistics from './Components/Statistics/statistics';
 
 let theme = createTheme({
   typography: {
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/" element={<SignIn />}/>
         <Route path="/login" element={<SignIn />}/>
         <Route path="/portfolio" element={<Portfolio />}/>
+        <Route path="/statistics" element={<Statistics />}/>
       </Routes>
     </ThemeProvider>
   )
