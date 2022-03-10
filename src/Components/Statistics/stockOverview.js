@@ -39,6 +39,7 @@ const StockOverview = ({ stock }) => {
   const percentageChange = (((stockValue - originalValue) / originalValue) * 100).toFixed(2)
 
   return (
+    <a href='' style={{textDecoration: 'none'}}>
     <div style={{padding: 11}}>
     <Card sx={{ display: 'flex', alignItems: 'center', width: '30vh', height: '16vh', borderRadius: 5}}>
       <FlexStock>
@@ -72,6 +73,7 @@ const StockOverview = ({ stock }) => {
       </CardContent>
       </Card>
       </div>
+      </a>
 
   )
 }

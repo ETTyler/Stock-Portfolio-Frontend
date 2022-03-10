@@ -16,6 +16,7 @@ import StockOverview from './stockOverview';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import StatsGraph from './statsGraph';
+import StatsCharts from './statsCharts';
 
 const Statistics = () => {
   const [stockData, setStockData] = useState([])
@@ -42,7 +43,7 @@ const Statistics = () => {
   return (
     <Box 
       sx={{ 
-        padding: 5,
+        padding: 2,
         px: 10,
         maxWidth: '100%',
         width: 'auto',
@@ -64,28 +65,21 @@ const Statistics = () => {
         justifySelf: 'center', 
         alignItems: 'center', 
         justifyContent: 'center',
-        borderRadius: 5
+        borderRadius: 5,
       }}>
         {stockData.map((stock) => (
           <StockOverview key={stock.transationID} stock={stock}/>
         ))}
       </Paper>
       <Paper elevation={6} sx={{gridArea: 'graph', height: '65vh', padding: 1, borderRadius: 5}}>
-        <StatsGraph />
+        <StatsGraph userID={decodedToken}/>
       </Paper>
-      <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5}}> Hello</Paper>
+      <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5}}>
+        <StatsCharts />
+      </Paper>
     </Box>
-
-
   )
 
 }
 
-
-
 export default Statistics;
-
-const CenterBox = styled.div`
-  display: flex;
-  justify-content: center;
-`
