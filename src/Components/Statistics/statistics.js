@@ -68,14 +68,14 @@ const Statistics = () => {
         borderRadius: 5,
       }}>
         {stockData.map((stock) => (
-          <StockOverview key={stock.transationID} stock={stock}/>
+          <StockOverview key={stock.transactionID} stock={stock}/>
         ))}
       </Paper>
       <Paper elevation={6} sx={{gridArea: 'graph', height: '65vh', padding: 1, borderRadius: 5}}>
         <StatsGraph userID={decodedToken}/>
       </Paper>
       <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5}}>
-        <StatsCharts />
+        <StatsCharts userID={decodedToken}/>
       </Paper>
     </Box>
   )

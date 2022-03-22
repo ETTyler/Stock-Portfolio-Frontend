@@ -17,56 +17,51 @@ import HighchartsReact from 'highcharts-react-official'
 import PieChart from "highcharts-react-official";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import axios from 'axios';
 
-
-const options = {
-  chart: {
-    type: "pie",
-    height: (14 / 16 * 100) + '%' 
-  },
-  title: {
-    text: ""
-  },
-  credits: {
-    enabled: false
-  },
-  plotOptions: {
-    pie: {
-      allowPointSelect: true,
-      cursor: "pointer",
-      dataLabels: {
-        enabled: true
-      },
-      showInLegend: false
-    }
-  },
-  series: [{
-    name: 'Percentage',
-    colorByPoint: true,
-    data: [{
-        name: 'Technology',
-        y: 40
-    }, {
-        name: 'Finance',
-        y: 20
-    }, {
-        name: 'Automotive',
-        y: 10
-    }, {
-        name: 'Entertainment',
-        y: 10
-    }, {
-        name: 'Energy',
-        y: 10
-    }, {
-        name: 'Food & Drink',
-        y: 10
-    }]
-}]
-}
-
-const StatsCharts = () => {
+const StatsCharts = ({ userID }) => {
   const [value, setValue] = React.useState(0);
+  const [data, setData] = React.useState([])
+  const id = userID.id
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/stocks/insights/${id}`)
+      .catch(error => {
+        console.log(error.toJSON());
+      })
+      .then(response => {
+        setData(response.data)
+      })
+  },[])
+  
+  const options = {
+    chart: {
+      type: "pie",
+      height: (14 / 16 * 100) + '%' 
+    },
+    title: {
+      text: ""
+    },
+    credits: {
+      enabled: false
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: "pointer",
+        dataLabels: {
+          enabled: true
+        },
+        showInLegend: false
+      }
+    },
+    series: [{
+      name: 'Percentage',
+      colorByPoint: true,
+      data: data
+    }]
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
