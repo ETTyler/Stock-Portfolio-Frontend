@@ -53,7 +53,9 @@ const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
       salePrice: data.get('price'),
       sharesSold: data.get('shares'),
       value: stockData.value,
-      shares: stockData.shares
+      shares: stockData.shares,
+      ticker: stockData.ticker,
+      userID: stockData.userID
     }
     console.log(userData)
     axios.post(url, userData)

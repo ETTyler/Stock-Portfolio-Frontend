@@ -23,11 +23,11 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '20rem',
+  width: '25rem',
   bgcolor: 'background.paper',
   border: '2px solid #1976d2',
-  boxShadow: 24,
-  p: 3,
+  boxShadow: 20,
+  p: 5,
   borderRadius: '5%'
 };
 
@@ -72,7 +72,7 @@ const Portfolio = () => {
           </CenterBox>
         </Grid>
         <Grid item xs={12} sx={{ mt: "1rem" }}>
-          <Button onClick={handleOpen} size="medium" variant="outlined" startIcon={<AddIcon />} sx={{}}>Add New</Button>
+          <Button onClick={handleOpen} size="medium" variant="outlined" startIcon={<AddIcon />}>New Purchase</Button>
           <Modal
             open={open}
             onClose={handleClose}

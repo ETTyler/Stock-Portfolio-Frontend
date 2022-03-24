@@ -103,7 +103,7 @@ const BuyForm = ({ handleClose}) => {
           />
         </LocalizationProvider>
         </div>
-        <input type="button" value="Submit" style={style}/>
+        <input type="submit" value="Submit" style={style}/>
       </form>
       </div>
     )
