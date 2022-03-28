@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/" element={<SignIn />}/>
         <Route path="/login" element={<SignIn />}/>
         <Route path="/portfolio" element={<Portfolio />}/>
-        <Route path="/statistics" element={<Statistics />}/>
+        <Route path="/insights" element={<Statistics />}/>
       </Routes>
     </ThemeProvider>
   )

@@ -26,8 +26,8 @@ const pages = [
     0
   ],
   [
-    'Statistics',
-    '/statistics',
+    'Insights',
+    '/insights',
     1
   ],
   [
@@ -62,7 +62,7 @@ const Navbar = ({ username }) => {
     if (path === '/portfolio') {
       return 0
     }
-    if (path === '/statistics') {
+    if (path === '/insights') {
       return 1
     }
     if (path === '/analytics') {

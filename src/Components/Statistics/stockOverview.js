@@ -12,6 +12,9 @@ import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import { useState, useEffect } from 'react'; 
 import { grid } from '@mui/system';
 import { Paper } from '@mui/material';
+import { createContext, useContext } from 'react';
+import { GraphContext } from './statistics';
+import Tooltip from '@mui/material/Tooltip';
 
 const SetColours = ({percentageChange}) => {
   if (percentageChange > 0) {
@@ -33,13 +36,24 @@ const SetColours = ({percentageChange}) => {
 }
 
 const StockOverview = ({ stock }) => {
-  console.log(stock)
   const stockValue = Number(stock.value)
   const originalValue = Number(stock.shares*stock.priceBought)
   const percentageChange = (((stockValue - originalValue) / originalValue) * 100).toFixed(2)
+  const { chosenGraph, setChosenGraph } = useContext(GraphContext)
+  
+  const handleClick = (event) => {
+    event.preventDefault()
+    if (chosenGraph === stock.Name) {
+      setChosenGraph('Portfolio')
+    }
+    else {
+      setChosenGraph(stock.Name)
+    }
+  }
 
   return (
-    <a href='' style={{textDecoration: 'none'}}>
+    <Tooltip title="Show/Hide Graph">
+    <a href='#' onClick={handleClick} style={{textDecoration: 'none'}}>
     <div style={{padding: 11}}>
     <Card sx={{ display: 'flex', alignItems: 'center', width: '30vh', height: '16vh', borderRadius: 5}}>
       <FlexStock>
@@ -66,14 +80,12 @@ const StockOverview = ({ stock }) => {
           <Typography component="div" variant="body2">
             <SetColours percentageChange={percentageChange} />
           </Typography>
-          <Typography component="div" variant="body">
-      
-        </Typography>
         </FlexStock>
       </CardContent>
       </Card>
       </div>
       </a>
+      </Tooltip>
 
   )
 }

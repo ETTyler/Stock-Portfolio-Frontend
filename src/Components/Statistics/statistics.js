@@ -17,10 +17,18 @@ import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import StatsGraph from './statsGraph';
 import StatsCharts from './statsCharts';
+import { createContext, useContext } from 'react';
+
+export const GraphContext = React.createContext({
+  chosenGraph: 'Portfolio',
+  setChosenGraph: () => {}
+})
 
 const Statistics = () => {
   const [stockData, setStockData] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [chosenGraph, setChosenGraph] = useState('Portfolio')
+  const value = { chosenGraph, setChosenGraph }
 
   const token = localStorage.getItem('token')
   const decodedToken = jwt_decode(token)
@@ -41,43 +49,45 @@ const Statistics = () => {
   }
   
   return (
-    <Box 
-      sx={{ 
-        padding: 2,
-        px: 10,
-        maxWidth: '100%',
-        width: 'auto',
-        display: 'grid',
-        gridTemplateRows: 'auto',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        justifyContent: 'center',
-        gap: 3,
-        gridTemplateAreas: `"stockBar stockBar stockBar"
-         "graph graph charts"`
-      }}
-    >
-      <Paper elevation={6} sx={{
-        gridArea: 'stockBar', 
-        height: '18vh', 
-        width: 'fit-content', 
-        display: 'flex', 
-        flexDirection: 'row', 
-        justifySelf: 'center', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        borderRadius: 5,
-      }}>
-        {stockData.map((stock) => (
-          <StockOverview key={stock.transactionID} stock={stock}/>
-        ))}
-      </Paper>
-      <Paper elevation={6} sx={{gridArea: 'graph', height: '65vh', padding: 1, borderRadius: 5}}>
-        <StatsGraph userID={decodedToken}/>
-      </Paper>
-      <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5}}>
-        <StatsCharts userID={decodedToken}/>
-      </Paper>
-    </Box>
+    <GraphContext.Provider value={value}>
+      <Box 
+        sx={{ 
+          padding: 2,
+          px: 10,
+          maxWidth: '100%',
+          width: 'auto',
+          display: 'grid',
+          gridTemplateRows: 'auto',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          justifyContent: 'center',
+          gap: 3,
+          gridTemplateAreas: `"stockBar stockBar stockBar"
+          "graph graph charts"`
+        }}
+      >
+        <Paper elevation={6} sx={{
+          gridArea: 'stockBar', 
+          height: '18vh', 
+          width: 'fit-content', 
+          display: 'flex', 
+          flexDirection: 'row', 
+          justifySelf: 'center', 
+          alignItems: 'center', 
+          ustifyContent: 'center',
+          borderRadius: 5,
+        }}>
+          {stockData.map((stock) => (
+            <StockOverview key={stock.transactionID} stock={stock}/>
+          ))}
+        </Paper>
+        <Paper elevation={6} sx={{gridArea: 'graph', height: '65vh', padding: 1, borderRadius: 5}}>
+          <StatsGraph userID={decodedToken}/>
+        </Paper>
+        <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5}}>
+          <StatsCharts userID={decodedToken}/>
+        </Paper>
+      </Box>
+    </GraphContext.Provider>
   )
 
 }

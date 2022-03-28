@@ -75,7 +75,7 @@ const StatsCharts = ({ userID }) => {
         dataLabels: {
           enabled: true
         },
-        showInLegend: false
+        showInLegend: true
       }
     },
     series: [{
@@ -103,7 +103,7 @@ const StatsCharts = ({ userID }) => {
         dataLabels: {
           enabled: true
         },
-        showInLegend: false
+        showInLegend: true
       }
     },
     series: [{
@@ -131,7 +131,7 @@ const StatsCharts = ({ userID }) => {
         dataLabels: {
           enabled: true
         },
-        showInLegend: false
+        showInLegend: true
       }
     },
     series: [{

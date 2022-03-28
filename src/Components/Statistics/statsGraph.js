@@ -15,33 +15,50 @@ import { Paper } from '@mui/material';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official'
 import axios from 'axios';
+import { GraphContext } from './statistics';
+import { useContext, createContext } from 'react';
 
 const StatsGraph = ({ userID }) => {
-  const [data, setData] = React.useState([])
+  const [portfolioData, setPortfolioData] = useState([])
+  const [individualData, setIndividualData] = useState([])
+  const [graphData, setGraphData] = useState([])
+  const { chosenGraph, setChosenGraph } = useContext(GraphContext)
   const id = userID.id
-
   useEffect(() => {
-    axios
+    if (chosenGraph !== "Portfolio") {
+      axios
+      .get(`http://localhost:3001/api/stocks/graph/${chosenGraph}/${id}`)
+      .catch(error => {
+        console.log(error.toJSON());
+     })
+      .then(response => {
+        setGraphData(response.data)
+        console.log(response.data)
+      })
+    }
+    else {
+      axios
       .get(`http://localhost:3001/api/stocks/history/${id}`)
       .catch(error => {
         console.log(error.toJSON());
       })
       .then(response => {
-        setData(response.data)
+        setGraphData(response.data)
+        console.log(response.data)
       })
-  },[])
-
-
+    }
+  },[chosenGraph])
+  
   const options = {
     chart: {
-      height: (8 / 16 * 100) + '%' 
+      height: (8.5 / 16 * 100) + '%' 
     },
       title: {
-        text: 'Portfolio Value'
+        text: chosenGraph
       },
       series: [{
-        name: 'Portfolio',
-        data: data,
+        name: chosenGraph,
+        data: graphData,
         tooltip: {
           valueDecimals: 2
         }
