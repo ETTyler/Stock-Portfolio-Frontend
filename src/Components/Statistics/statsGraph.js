@@ -33,7 +33,6 @@ const StatsGraph = ({ userID }) => {
      })
       .then(response => {
         setGraphData(response.data)
-        console.log(response.data)
       })
     }
     else {
@@ -44,7 +43,6 @@ const StatsGraph = ({ userID }) => {
       })
       .then(response => {
         setGraphData(response.data)
-        console.log(response.data)
       })
     }
   },[chosenGraph])

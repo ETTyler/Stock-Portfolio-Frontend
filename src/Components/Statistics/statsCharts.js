@@ -147,7 +147,7 @@ const StatsCharts = ({ userID }) => {
 
   return (
     <Investments>
-      <Typography variant="h5" component="div">
+      <Typography variant="h6" component="div">
         Investments By
       </Typography>
       <Box sx={{p: 1}}>

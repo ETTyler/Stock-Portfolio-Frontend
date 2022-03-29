@@ -65,16 +65,20 @@ const Statistics = () => {
           "graph graph charts"`
         }}
       >
-        <Paper elevation={6} sx={{
+        <Paper elevation={3} sx={{
           gridArea: 'stockBar', 
-          height: '18vh', 
+          height: '20vh', 
           width: 'fit-content', 
+          maxWidth: '95vw',
+          overflowY: 'hidden',
+          overflowX: 'auto',
           display: 'flex', 
           flexDirection: 'row', 
           justifySelf: 'center', 
           alignItems: 'center', 
-          ustifyContent: 'center',
+          justifyContent: 'center',
           borderRadius: 5,
+          paddingX: 1.5
         }}>
           {stockData.map((stock) => (
             <StockOverview key={stock.transactionID} stock={stock}/>

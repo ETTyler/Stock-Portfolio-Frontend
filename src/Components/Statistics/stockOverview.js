@@ -16,8 +16,9 @@ import { createContext, useContext } from 'react';
 import { GraphContext } from './statistics';
 import Tooltip from '@mui/material/Tooltip';
 
-const SetColours = ({percentageChange}) => {
+const SetColours = ({percentageChange, setValueColour}) => {
   if (percentageChange > 0) {
+    setValueColour('#3fcc6f')
     return(
       <>
         <Typography component="div" variant="body" sx={{color: '#3fcc6f', display: 'flex', justifyContent: 'flex-end' }}>
@@ -26,13 +27,16 @@ const SetColours = ({percentageChange}) => {
       </>
     )
   }
-  return (
-    <>
-      <Typography component="div" variant="body" sx={{color: '#fd6e70', display: 'flex', justifyContent: 'flex-end' }}>
-        {percentageChange}%
-      </Typography>
-    </>
-  )
+  else {
+    setValueColour('#fd6e70')
+    return (
+      <>
+        <Typography component="div" variant="body" sx={{color: '#fd6e70', display: 'flex', justifyContent: 'flex-end' }}>
+          {percentageChange}%
+        </Typography>
+      </>
+    )
+  }
 }
 
 const StockOverview = ({ stock }) => {
@@ -40,21 +44,25 @@ const StockOverview = ({ stock }) => {
   const originalValue = Number(stock.shares*stock.priceBought)
   const percentageChange = (((stockValue - originalValue) / originalValue) * 100).toFixed(2)
   const { chosenGraph, setChosenGraph } = useContext(GraphContext)
+  const [tooltip, setTooltip] = useState('Show')
+  const [valueColour, setValueColour] = useState('')
   
   const handleClick = (event) => {
     event.preventDefault()
     if (chosenGraph === stock.Name) {
       setChosenGraph('Portfolio')
+      setTooltip('Show')
     }
     else {
       setChosenGraph(stock.Name)
+      setTooltip('Hide')
     }
   }
 
   return (
-    <Tooltip title="Show/Hide Graph">
+    <Tooltip title={tooltip+" "+stock.Name+" Graph"}>
     <a href='#' onClick={handleClick} style={{textDecoration: 'none'}}>
-    <div style={{padding: 11}}>
+    <div style={{padding: 10}}>
     <Card sx={{ display: 'flex', alignItems: 'center', width: '30vh', height: '16vh', borderRadius: 5}}>
       <FlexStock>
       <CardContent sx={{ flex: '0 1 auto', display: 'flex'}}>
@@ -64,7 +72,7 @@ const StockOverview = ({ stock }) => {
         </Typography>
       </CardContent>
       <CardContent sx={{ flex: '0 1 auto'}}>
-        <Typography component="div" variant="h6">
+        <Typography component="div" variant="h6" sx={{ color: valueColour }}>
           {stockValue.toLocaleString('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -78,7 +86,7 @@ const StockOverview = ({ stock }) => {
             {stock.Ticker}
           </Typography>
           <Typography component="div" variant="body2">
-            <SetColours percentageChange={percentageChange} />
+            <SetColours percentageChange={percentageChange} setValueColour={setValueColour} />
           </Typography>
         </FlexStock>
       </CardContent>
@@ -91,7 +99,6 @@ const StockOverview = ({ stock }) => {
 }
 
 export default StockOverview;
-
 
 const FlexStock = styled.div`
   display: flex;

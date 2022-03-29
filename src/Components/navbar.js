@@ -13,11 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
 } from "react-router-dom"
+import PersonIcon from '@mui/icons-material/Person';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const pages = [
   [
@@ -40,24 +44,25 @@ const pages = [
 const settings = [
   [
     'Profile',
-    '/profile'
+    '/profile',
+    <PersonIcon color='primary'/>
   ],
   [
-    'Account',
-    '/account'
+    'Settings',
+    '/settings',
+    <SettingsIcon color='primary'/>
   ],
   [
     'Logout',
-    '/login'
+    '/login',
+    <LogoutIcon color='primary'/>
   ]
 ]
-
 
 const Navbar = ({ username }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { pathname } = useLocation()
-
   const setThis = (path) => {
     if (path === '/portfolio') {
       return 0
@@ -69,6 +74,11 @@ const Navbar = ({ username }) => {
       return 2
     }
   }
+
+  const [value, setValue] = useState(setThis(pathname));
+  useEffect(() => {
+    setValue(setThis(pathname))
+  }, [pathname])
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -83,12 +93,6 @@ const Navbar = ({ username }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  const [value, setValue] = useState(setThis(pathname));
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
   };
 
   return (
@@ -133,7 +137,9 @@ const Navbar = ({ username }) => {
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           <Tabs
-            onChange={(e, v) => setValue(v)}
+            onChange={(e, v) => {
+              setValue(v)
+            }}
             value={value}
             aria-label="Navigation Tabs"
             textColor="inherit"
@@ -181,6 +187,9 @@ const Navbar = ({ username }) => {
                   onClick={handleCloseNavMenu} 
                   component={Link} 
                   to={setting[1]}>
+                  <ListItemIcon>
+                    {setting[2]}
+                  </ListItemIcon>
                   <Typography textAlign="center">{setting[0]}</Typography>
                 </MenuItem>
               ))}
