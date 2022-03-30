@@ -46,6 +46,15 @@ const StockOverview = ({ stock }) => {
   const { chosenGraph, setChosenGraph } = useContext(GraphContext)
   const [tooltip, setTooltip] = useState('Show')
   const [valueColour, setValueColour] = useState('')
+
+  useEffect(() => {
+    if (chosenGraph === stock.Name) {
+      setTooltip('Hide')
+    }
+    else {
+      setTooltip('Show')
+    }
+  }, [chosenGraph])
   
   const handleClick = (event) => {
     event.preventDefault()
@@ -60,13 +69,13 @@ const StockOverview = ({ stock }) => {
   }
 
   return (
+    <div style={{padding: 10}}>
     <Tooltip title={tooltip+" "+stock.Name+" Graph"}>
     <a href='#' onClick={handleClick} style={{textDecoration: 'none'}}>
-    <div style={{padding: 10}}>
     <Card sx={{ display: 'flex', alignItems: 'center', width: '30vh', height: '16vh', borderRadius: 5}}>
       <FlexStock>
       <CardContent sx={{ flex: '0 1 auto', display: 'flex'}}>
-      <img sx={{borderRadius: '10%', pr: 5}} src={`${stock.LogoURL}?size=30`}></img>
+      <img style={{borderRadius: 5}} src={`${stock.LogoURL}?size=30`}></img>
         <Typography component="div" variant="h6">
           &nbsp;{stock.Name}
         </Typography>
@@ -91,9 +100,9 @@ const StockOverview = ({ stock }) => {
         </FlexStock>
       </CardContent>
       </Card>
-      </div>
       </a>
       </Tooltip>
+      </div>
 
   )
 }

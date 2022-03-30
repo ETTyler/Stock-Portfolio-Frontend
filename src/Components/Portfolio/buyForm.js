@@ -39,7 +39,7 @@ const style = {
   cursor: 'pointer'
 }
 
-const BuyForm = ({ handleClose}) => {
+const BuyForm = ({ handleClose, setIsUpdated }) => {
   const [stocks, setStocks] = useState([])
   const [value, setValue] = useState(null)
   const [stockName, setStockName] = useState([])
@@ -70,6 +70,7 @@ const BuyForm = ({ handleClose}) => {
     axios.post(url, userData)
       .then(res => { 
         handleClose()
+        setIsUpdated(true)
       })
       .catch(err => console.log(err.data))
   }

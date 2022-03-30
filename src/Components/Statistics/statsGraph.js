@@ -24,6 +24,8 @@ const StatsGraph = ({ userID }) => {
   const [graphData, setGraphData] = useState([])
   const { chosenGraph, setChosenGraph } = useContext(GraphContext)
   const id = userID.id
+  const [isLoading, setLoading] = useState(true)
+
   useEffect(() => {
     if (chosenGraph !== "Portfolio") {
       axios
@@ -33,6 +35,7 @@ const StatsGraph = ({ userID }) => {
      })
       .then(response => {
         setGraphData(response.data)
+        setLoading(false)
       })
     }
     else {
@@ -43,9 +46,14 @@ const StatsGraph = ({ userID }) => {
       })
       .then(response => {
         setGraphData(response.data)
+        setLoading(false)
       })
     }
   },[chosenGraph])
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   
   const options = {
     chart: {

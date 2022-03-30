@@ -83,7 +83,7 @@ const Portfolio = () => {
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Add New Stock Purchase
               </Typography>
-              <BuyForm handleClose={handleClose}/>
+              <BuyForm handleClose={handleClose} setIsUpdated={setIsUpdated}/>
             </Box>
           </Modal>
           {stockData.map((stock) => (

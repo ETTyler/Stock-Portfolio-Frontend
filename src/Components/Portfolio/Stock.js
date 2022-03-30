@@ -68,11 +68,11 @@ const Stock = ( { data, setIsUpdated } ) => {
       <View>
         <Card sx={{ display: 'flex', alignItems: 'center', p: 0, px: 0}}>
           <CardContent sx={{ flex: '0 1 auto', display: 'flex' }}>
-            <img sx={{borderRadius: '10%'}} src={`${data.LogoURL}?size=45`}></img>
+            <img style={{borderRadius: 8}} src={`${data.LogoURL}?size=45`}></img>
           </CardContent>
           <CardContent sx={{ flex: '20 1 auto', display: 'flex', justifyItems: "flex-start"}}>
             <FlexStock>
-              <Typography component="div" variant="h5">
+              <Typography component="div" variant="h6">
                 {data.Name} 
               </Typography>
               <Typography component="div" variant="body">

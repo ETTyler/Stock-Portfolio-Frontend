@@ -61,11 +61,12 @@ const Statistics = () => {
           gridTemplateColumns: 'repeat(3, 1fr)',
           justifyContent: 'center',
           gap: 3,
+          rowGap: 1,
           gridTemplateAreas: `"stockBar stockBar stockBar"
           "graph graph charts"`
         }}
       >
-        <Paper elevation={3} sx={{
+        <Paper elevation={0} sx={{
           gridArea: 'stockBar', 
           height: '20vh', 
           width: 'fit-content', 
@@ -76,9 +77,7 @@ const Statistics = () => {
           flexDirection: 'row', 
           justifySelf: 'center', 
           alignItems: 'center', 
-          justifyContent: 'center',
-          borderRadius: 5,
-          paddingX: 1.5
+          justifyContent: 'center'
         }}>
           {stockData.map((stock) => (
             <StockOverview key={stock.transactionID} stock={stock}/>
