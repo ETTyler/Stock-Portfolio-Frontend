@@ -49,7 +49,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     axios.all([
-      axios.get(`http://localhost:3001/api/stocks/update`),
+      axios.get(`http://localhost:3001/api/stocks/update/${decodedToken.id}`),
       axios.get(`http://localhost:3001/api/stocks/info/${decodedToken.id}`)
     ])
     .then(axios.spread((res1, res2) => {
@@ -87,7 +87,7 @@ const Portfolio = () => {
             </Box>
           </Modal>
           {stockData.map((stock) => (
-            <Stock key={stock.transationID} data={stock} setIsUpdated={setIsUpdated}/>
+            <Stock key={stock.transactionID} data={stock} setIsUpdated={setIsUpdated}/>
           ))}
         </Grid>
       </Grid>

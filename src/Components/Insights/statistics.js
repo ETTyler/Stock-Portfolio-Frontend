@@ -34,14 +34,12 @@ const Statistics = () => {
   const decodedToken = jwt_decode(token)
 
   useEffect(() => {
-    axios.all([
-      axios.get(`http://localhost:3001/api/stocks/update`),
-      axios.get(`http://localhost:3001/api/stocks/info/${decodedToken.id}`)
-    ])
-    .then(axios.spread((res1, res2) => {
-      setStockData(res2.data)
+    axios
+    .get(`http://localhost:3001/api/stocks/info/${decodedToken.id}`)
+    .then(res => {
+      setStockData(res.data)
       setLoading(false)
-    }))
+    })
   }, [])
 
   if (isLoading) {
@@ -83,10 +81,11 @@ const Statistics = () => {
             <StockOverview key={stock.transactionID} stock={stock}/>
           ))}
         </Paper>
-        <Paper elevation={6} sx={{gridArea: 'graph', height: '65vh', padding: 1, borderRadius: 5}}>
+        <Paper elevation={6} sx={{
+          gridArea: 'graph', height: '65vh', padding: 1, borderRadius: 5, width: '60vw'}}>
           <StatsGraph userID={decodedToken}/>
         </Paper>
-        <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5}}>
+        <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5, width: 'fit-content'}}>
           <StatsCharts userID={decodedToken}/>
         </Paper>
       </Box>

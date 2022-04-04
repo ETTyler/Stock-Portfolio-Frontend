@@ -7,11 +7,12 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import SignIn from './Components/login';
 import Navbar from './Components/navbar';
 import Portfolio from './Components/Portfolio/portfolio';
+import Statistics from './Components/Insights/statistics';
+import Analytics from './Components/Analytics/analytics';
 import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
 } from "react-router-dom"
-import Statistics from './Components/Statistics/statistics';
 
 let theme = createTheme({
   typography: {
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/login" element={<SignIn />}/>
         <Route path="/portfolio" element={<Portfolio />}/>
         <Route path="/insights" element={<Statistics />}/>
+        <Route path="/analytics" element={<Analytics />}/>
       </Routes>
     </ThemeProvider>
   )

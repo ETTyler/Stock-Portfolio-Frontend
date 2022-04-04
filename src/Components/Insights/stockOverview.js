@@ -18,7 +18,6 @@ import Tooltip from '@mui/material/Tooltip';
 
 const SetColours = ({percentageChange, setValueColour}) => {
   if (percentageChange > 0) {
-    setValueColour('#3fcc6f')
     return(
       <>
         <Typography component="div" variant="body" sx={{color: '#3fcc6f', display: 'flex', justifyContent: 'flex-end' }}>
@@ -28,7 +27,6 @@ const SetColours = ({percentageChange, setValueColour}) => {
     )
   }
   else {
-    setValueColour('#fd6e70')
     return (
       <>
         <Typography component="div" variant="body" sx={{color: '#fd6e70', display: 'flex', justifyContent: 'flex-end' }}>

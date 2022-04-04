@@ -32,8 +32,8 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' , justifyContent: 'center', p: 0}}>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -60,7 +60,7 @@ const StatsCharts = ({ userID }) => {
   const sectorOptions = {
     chart: {
       type: "pie",
-      height: (14 / 16 * 100) + '%' 
+      height: (12 / 16 * 100) + '%' 
     },
     title: {
       text: ""
@@ -88,7 +88,7 @@ const StatsCharts = ({ userID }) => {
   const typeOptions = {
     chart: {
       type: "pie",
-      height: (14 / 16 * 100) + '%' 
+      height: (12 / 16 * 100) + '%' 
     },
     title: {
       text: ""
@@ -116,7 +116,7 @@ const StatsCharts = ({ userID }) => {
   const posOptions = {
     chart: {
       type: "pie",
-      height: (14 / 16 * 100) + '%' 
+      height: (12 / 16 * 100) + '%' 
     },
     title: {
       text: ""

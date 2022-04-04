@@ -15,30 +15,13 @@ import { Paper } from '@mui/material';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official'
 import axios from 'axios';
-import { GraphContext } from './statistics';
-import { useContext, createContext } from 'react';
 
-const StatsGraph = ({ userID }) => {
-  const [portfolioData, setPortfolioData] = useState([])
-  const [individualData, setIndividualData] = useState([])
+const AnalyticsGraph = ({ userID }) => {
   const [graphData, setGraphData] = useState([])
-  const { chosenGraph, setChosenGraph } = useContext(GraphContext)
   const id = userID.id
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (chosenGraph !== "Portfolio") {
-      axios
-      .get(`http://localhost:3001/api/stocks/graph/${chosenGraph}/${id}`)
-      .catch(error => {
-        console.log(error.toJSON());
-     })
-      .then(response => {
-        setGraphData(response.data)
-        setLoading(false)
-      })
-    }
-    else {
       axios
       .get(`http://localhost:3001/api/stocks/history/${id}`)
       .catch(error => {
@@ -48,8 +31,7 @@ const StatsGraph = ({ userID }) => {
         setGraphData(response.data)
         setLoading(false)
       })
-    }
-  },[chosenGraph])
+  },[])
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -57,20 +39,20 @@ const StatsGraph = ({ userID }) => {
   
   const options = {
     chart: {
-      height: (8.5 / 16 * 100) + '%' 
+      height: (6.6 / 16 * 100) + '%'
     },
-      title: {
-        text: chosenGraph
+    title: {
+        text: ''
       },
       series: [{
-        name: chosenGraph,
+        name: 'Portfolio',
         data: graphData,
         tooltip: {
-          valueDecimals: 2
+          valueDecimals: 2,
         }
       }, /*
       {
-        name: 'TSLA',
+        name: 'S&P 500',
         data: data[0,1],
         tooltip: {
           valueDecimals: 2
@@ -87,7 +69,6 @@ const StatsGraph = ({ userID }) => {
 
   return (
     <HighchartsReact
-      sx={{height: 'max'}}
       highcharts={Highcharts}
       constructorType={'stockChart'}
       options={options}
@@ -95,5 +76,5 @@ const StatsGraph = ({ userID }) => {
   )
 }
 
-export default StatsGraph;
+export default AnalyticsGraph;
 
