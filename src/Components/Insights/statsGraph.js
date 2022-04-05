@@ -64,23 +64,11 @@ const StatsGraph = ({ userID }) => {
         name: chosenGraph,
         data: graphData,
         tooltip: {
-          valueDecimals: 2
+          valueDecimals: 2,
+          valuePrefix: '$',
+          valueSuffix: ' USD'
         }
-      }, /*
-      {
-        name: 'TSLA',
-        data: data[0,1],
-        tooltip: {
-          valueDecimals: 2
-        }
-      },
-      {
-        name: 'AAPL',
-        data: data[0,2],
-        tooltip: {
-          valueDecimals: 2
-        }
-      } */]
+      },]
   }
 
   return (

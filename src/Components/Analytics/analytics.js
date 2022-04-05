@@ -26,8 +26,8 @@ const Analytics = () => {
   return (
       <Box 
         sx={{ 
-          padding: 2,
-          px: 10,
+          px: 12,
+          paddingTop: 3,
           maxWidth: '100%',
           width: 'auto',
           display: 'grid',
@@ -61,7 +61,7 @@ const Analytics = () => {
         <Paper elevation={3} sx={{
           gridArea: 'friends', 
           height: '88vh', 
-          width: '30vw', 
+          width: '25vw', 
           maxWidth: '95vw',
           overflowY: 'hidden',
           overflowX: 'auto',

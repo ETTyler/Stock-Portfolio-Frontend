@@ -17,18 +17,21 @@ import HighchartsReact from 'highcharts-react-official'
 import axios from 'axios';
 
 const AnalyticsGraph = ({ userID }) => {
-  const [graphData, setGraphData] = useState([])
+  const [userGraph, setUserGraph] = useState([])
+  const [marketGraph, setMarketGraph] = useState([])
   const id = userID.id
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
       axios
-      .get(`http://localhost:3001/api/stocks/history/${id}`)
+      .get(`http://localhost:3001/api/stocks/analytics/graph/${id}`)
       .catch(error => {
         console.log(error.toJSON());
       })
       .then(response => {
-        setGraphData(response.data)
+        console.log(response)
+        setUserGraph(response.data.userDataset)
+        setMarketGraph(response.data.marketDataset)
         setLoading(false)
       })
   },[])
@@ -39,32 +42,27 @@ const AnalyticsGraph = ({ userID }) => {
   
   const options = {
     chart: {
-      height: (6.6 / 16 * 100) + '%'
+      height: (6.7 / 16 * 100) + '%'
     },
     title: {
-        text: ''
+        text: 'Percentage Change'
       },
       series: [{
         name: 'Portfolio',
-        data: graphData,
+        data: userGraph,
         tooltip: {
           valueDecimals: 2,
-        }
-      }, /*
-      {
-        name: 'S&P 500',
-        data: data[0,1],
-        tooltip: {
-          valueDecimals: 2
-        }
+          valueSuffix: '%'
+        },
       },
       {
-        name: 'AAPL',
-        data: data[0,2],
+        name: 'Market ($VOO)',
+        data: marketGraph,
         tooltip: {
-          valueDecimals: 2
-        }
-      } */]
+          valueDecimals: 2,
+          valueSuffix: '%'
+        },
+      }]
   }
 
   return (

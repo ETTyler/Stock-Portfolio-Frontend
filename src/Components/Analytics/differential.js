@@ -23,7 +23,7 @@ const SetColours = ({ differential }) => {
         <Typography variant="body2" component="div" sx={{color: "#1976d2"}}>
           Outperforming the Market by:
         </Typography>
-        <Typography variant="h4" sx={{color: "#3fcc6f"}}>
+        <Typography variant="h5" sx={{color: "#3fcc6f"}}>
           +{differential}% <ArrowUpwardIcon fontSize='medium' sx={{color: "#3fcc6f"}}/>
         </Typography>
       </div>
@@ -34,7 +34,7 @@ const SetColours = ({ differential }) => {
       <Typography variant="body2" component="div" sx={{color: "#1976d2"}}>
         Underperforming the Market by:
       </Typography>
-      <Typography variant="h4" sx={{color: "#fd6e70"}}>
+      <Typography variant="h5" sx={{color: "#fd6e70"}}>
         {differential}% <ArrowDownwardSharpIcon fontSize='medium' sx={{color: "#fd6e70"}}/>
       </Typography>
     </div>
