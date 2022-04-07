@@ -81,7 +81,11 @@ const StatsCharts = ({ userID }) => {
     series: [{
       name: 'Percentage',
       colorByPoint: true,
-      data: data[0]
+      data: data[0],
+      tooltip: {
+        valueDecimals: 2,
+        valueSuffix: '%'
+      }
     }]
   }
 
@@ -109,7 +113,11 @@ const StatsCharts = ({ userID }) => {
     series: [{
       name: 'Percentage',
       colorByPoint: true,
-      data: data[1]
+      data: data[1],
+      tooltip: {
+        valueDecimals: 2,
+        valueSuffix: '%'
+      }
     }]
   }
 
@@ -129,7 +137,7 @@ const StatsCharts = ({ userID }) => {
         allowPointSelect: true,
         cursor: "pointer",
         dataLabels: {
-          enabled: true
+          enabled: true,
         },
         showInLegend: true
       }
@@ -137,7 +145,11 @@ const StatsCharts = ({ userID }) => {
     series: [{
       name: 'Percentage',
       colorByPoint: true,
-      data: data[2]
+      data: data[2],
+      tooltip: {
+        valueDecimals: 2,
+        valueSuffix: '%'
+      }
     }]
   }
 

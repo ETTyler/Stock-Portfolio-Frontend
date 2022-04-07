@@ -20,6 +20,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import jwt_decode from "jwt-decode";
 
 const style = {
@@ -41,39 +44,68 @@ const style = {
 
 const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
   const [date, setDate] = useState(null)
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  }
   
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     const url = `http://localhost:3001/api/sale/new`
-    const userData = {
-      transactionID: stockData.transactionID,
-      saleDate: date,
-      salePrice: data.get('price'),
-      sharesSold: data.get('shares'),
-      value: stockData.value,
-      shares: stockData.shares,
-      ticker: stockData.ticker,
-      userID: stockData.userID
+    if (checked) {
+      const userData = {
+        transactionID: stockData.transactionID,
+        saleDate: date,
+        salePrice: false,
+        sharesSold: data.get('shares'),
+        value: stockData.value,
+        shares: stockData.shares,
+        ticker: stockData.ticker,
+        userID: stockData.userID
+      }
+      axios.post(url, userData)
+        .then(res => { 
+          console.log(res)
+          setIsUpdated(true)
+          handleClose()
+        })
+        .catch(err => console.log(err.data))
     }
-    console.log(userData)
-    axios.post(url, userData)
-      .then(res => { 
-        console.log(res)
-        setIsUpdated(true)
-        handleClose()
-      })
-      .catch(err => console.log(err.data))
+    else {
+      const userData = {
+        transactionID: stockData.transactionID,
+        saleDate: date,
+        salePrice: data.get('price'),
+        sharesSold: data.get('shares'),
+        value: stockData.value,
+        shares: stockData.shares,
+        ticker: stockData.ticker,
+        userID: stockData.userID
+      }
+      axios.post(url, userData)
+        .then(res => { 
+          console.log(res)
+          setIsUpdated(true)
+          handleClose()
+        })
+        .catch(err => console.log(err.data))
+    }
   }
   
     return (
       <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autocomplete="off">
         <TextField name="shares" label="Shares Sold" variant="standard" fullWidth style={{marginBottom: "5%"}} />
         <br/>
-        <TextField name="price" label="Price Sold At" variant="standard" fullWidth style={{marginBottom: "5%"}}
-        />
+        <FormGroup>
+          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange}/>} label="Use Current Price"/>
+          {!checked && (
+            <TextField name="price" label="Price Sold At" variant="standard" fullWidth style={{marginBottom: "5%"}} />
+          )}
+        </FormGroup>
         <div style={{marginBottom: "5%"}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker

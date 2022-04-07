@@ -17,6 +17,9 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
@@ -43,6 +46,11 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
   const [stocks, setStocks] = useState([])
   const [value, setValue] = useState(null)
   const [stockName, setStockName] = useState([])
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  }
   
   useEffect(() => {
     axios
@@ -59,25 +67,41 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
     const decodedToken = jwt_decode(token)
 
     const url = `http://localhost:3001/api/purchases/new/`
-    const userData = {
-      userID: decodedToken.id,
-      ticker: stockName.ticker,
-      date: value,
-      price: data.get('price'),
-      shares: data.get('shares')
-    }
-    console.log(userData)
-    axios.post(url, userData)
+    if (checked) {
+      const userData = {
+        userID: decodedToken.id,
+        ticker: stockName.ticker,
+        date: value,
+        price: false,
+        shares: data.get('shares')
+      }
+      axios.post(url, userData)
       .then(res => { 
         handleClose()
         setIsUpdated(true)
       })
       .catch(err => console.log(err.data))
+    }
+    else {
+      const userData = {
+        userID: decodedToken.id,
+        ticker: stockName.ticker,
+        date: value,
+        price: data.get('price'),
+        shares: data.get('shares')
+      }
+      axios.post(url, userData)
+      .then(res => { 
+        handleClose()
+        setIsUpdated(true)
+      })
+      .catch(err => console.log(err.data))
+    }
   }
 
     return (
       <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autocomplete="off">
         <Autocomplete
           id="stock"
           name="stock"
@@ -89,8 +113,12 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
         />
         <TextField name="shares" label="Shares" variant="standard" fullWidth style={{marginBottom: "5%"}} />
         <br/>
-        <TextField name="price" label="Price Bought At" variant="standard" fullWidth style={{marginBottom: "5%"}}
-        />
+        <FormGroup>
+          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange}/>} label="Use Current Price"/>
+          {!checked && (
+            <TextField name="price" label="Price Bought At" variant="standard" fullWidth style={{marginBottom: "5%"}} />
+          )}
+        </FormGroup>
         <div style={{marginBottom: "5%"}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker

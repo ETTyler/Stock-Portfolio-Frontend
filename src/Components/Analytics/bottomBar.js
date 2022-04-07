@@ -31,8 +31,9 @@ const BottomBar = ({ userID }) => {
     })
     .then(response => {
       setStockData(response.data)
-      setHighestValue(Number(response.data.highestValue.value))
-      setLowestValue(Number(response.data.lowestValue.value))
+      console.log(response.data)
+      setHighestValue(Number(response.data.highestStockData.value))
+      setLowestValue(Number(response.data.lowestStockData.value))
       setLoading(false)
     })
   },[])
@@ -62,8 +63,8 @@ const BottomBar = ({ userID }) => {
         <Typography variant='body1' component="div" sx={{color: "#1976d2", fontSize:'0.8rem', padding: 0.8}}>
           Largest Gain
         </Typography>
-        <Typography variant='h6' component="div">
-          {stockData.largestGain.ticker}
+        <Typography variant='h6' component="div" sx={{display: 'flex', alignItems: 'center'}}>
+          <img style={{borderRadius: 5}} src={`${stockData.largestGain.LogoURL}?size=20`}></img>&nbsp;{stockData.largestGain.name}
         </Typography>
         <Typography variant='h6' component="div" sx={{color: "#3fcc6f", justifySelf: 'flex-end'}}>
           +{stockData.largestGain.percentage}%
@@ -81,8 +82,8 @@ const BottomBar = ({ userID }) => {
         <Typography variant='body1' component="div" sx={{color: "#1976d2", fontSize:'0.8rem', padding: 0.8}}>
           Largest Loss
         </Typography>
-        <Typography variant='h6' component="div">
-          {stockData.largestLoss.ticker}
+        <Typography variant='h6' component="div" sx={{display: 'flex', alignItems: 'center'}}>
+          <img style={{borderRadius: 5}} src={`${stockData.largestLoss.LogoURL}?size=20`}></img>&nbsp;{stockData.largestLoss.name}
         </Typography>
         <Typography variant='h6' component="div" sx={{color: "#fd6e70", justifySelf: 'flex-end'}}>
           {stockData.largestLoss.percentage}%
@@ -100,8 +101,8 @@ const BottomBar = ({ userID }) => {
         <Typography variant='body1' component="div" sx={{color: "#1976d2", fontSize:'0.8rem', padding: 0.8}}>
           Highest Value
         </Typography>
-        <Typography variant='h6' component="div">
-          {stockData.highestValue.ticker}
+        <Typography variant='h6' component="div" sx={{display: 'flex', alignItems: 'center'}}>
+          <img style={{borderRadius: 5}} src={`${stockData.highestStockData.LogoURL}?size=20`}></img>&nbsp;{stockData.highestStockData.Name}
         </Typography>
         <Typography variant='h6' component="div" sx={{color: "#3fcc6f", justifySelf: 'flex-end'}}>
           {highestValue.toLocaleString('en-US', {
@@ -122,8 +123,8 @@ const BottomBar = ({ userID }) => {
         <Typography variant='body1' component="div" sx={{color: "#1976d2", fontSize:'0.8rem', padding: 0.8}}>
           Lowest Value
         </Typography>
-        <Typography variant='h6' component="div">
-          {stockData.lowestValue.ticker}
+        <Typography variant='h6' component="div" sx={{display: 'flex', alignItems: 'center'}}>
+          <img style={{borderRadius: 5}} src={`${stockData.lowestStockData.LogoURL}?size=20`}></img>&nbsp;{stockData.lowestStockData.Name}
         </Typography>
         <Typography variant='h6' component="div" sx={{color: "#fd6e70", justifySelf: 'flex-end'}}>
           {lowestValue.toLocaleString('en-US', {

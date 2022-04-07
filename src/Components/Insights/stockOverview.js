@@ -73,7 +73,7 @@ const StockOverview = ({ stock }) => {
     <Card sx={{ display: 'flex', alignItems: 'center', width: '30vh', height: '16vh', borderRadius: 5}}>
       <FlexStock>
       <CardContent sx={{ flex: '0 1 auto', display: 'flex'}}>
-      <img style={{borderRadius: 5}} src={`${stock.LogoURL}?size=30`}></img>
+      <img style={{borderRadius: 5}} src={`${stock.LogoURL}?size=31`}></img>
         <Typography component="div" variant="h6">
           &nbsp;{stock.Name}
         </Typography>
