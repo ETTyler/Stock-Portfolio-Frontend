@@ -29,7 +29,6 @@ const AnalyticsGraph = ({ userID }) => {
         console.log(error.toJSON());
       })
       .then(response => {
-        console.log(response)
         setUserGraph(response.data.userDataset)
         setMarketGraph(response.data.marketDataset)
         setLoading(false)

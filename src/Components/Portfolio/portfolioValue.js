@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 import styled from 'styled-components'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
@@ -58,11 +59,9 @@ const PortfolioValue = ( {data} ) => {
   )
   
   return (
-    <Card sx={{ width: "auto", height: "auto", p: 2, px: 8}}>
-      <CardContent>
-        <SetColours portfolioDifference={portfolioValue-originalValue} portfolioValue={portfolioValue}/>
-      </CardContent>
-    </Card>
+    <Paper elevation={1} sx={{ width: "auto", height: "auto", p: 5, px: 10, borderRadius: 4}}>
+      <SetColours portfolioDifference={portfolioValue-originalValue} portfolioValue={portfolioValue}/>
+    </Paper>
   )
 }
 

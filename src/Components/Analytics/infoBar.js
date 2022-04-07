@@ -43,7 +43,7 @@ const InfoBar = ({ userID }) => {
       alignItems: 'flex-start',
       justifyContent: 'flex-start',
       borderRadius: 6,
-      overflow: 'clip'
+      overflow: 'hidden'
     }}>
       <div style={{padding: '1em'}}>
       <Typography variant='body2' component="div" sx={{color: 'gray'}}>

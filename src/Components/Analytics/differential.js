@@ -20,22 +20,22 @@ const SetColours = ({ differential }) => {
   if (differential > 0) {
     return (
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
-        <Typography variant="body2" component="div" sx={{color: "#1976d2"}}>
+        <Typography variant="body2" component="div" sx={{color: "#1976d2", fontSize:'0.8em'}}>
           Outperforming the Market by:
         </Typography>
         <Typography variant="h5" sx={{color: "#3fcc6f"}}>
-          +{differential}% <ArrowUpwardIcon fontSize='medium' sx={{color: "#3fcc6f"}}/>
+          +{differential.toFixed(2)}% <ArrowUpwardIcon fontSize='small' sx={{color: "#3fcc6f"}}/>
         </Typography>
       </div>
     )
   }
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
-      <Typography variant="body2" component="div" sx={{color: "#1976d2"}}>
+      <Typography variant="body2" component="div" sx={{color: "#1976d2", fontSize:'0.8em'}}>
         Underperforming the Market by:
       </Typography>
       <Typography variant="h5" sx={{color: "#fd6e70"}}>
-        {differential}% <ArrowDownwardSharpIcon fontSize='medium' sx={{color: "#fd6e70"}}/>
+        {differential.toFixed(2)}% <ArrowDownwardSharpIcon fontSize='small' sx={{color: "#fd6e70"}}/>
       </Typography>
     </div>
   )

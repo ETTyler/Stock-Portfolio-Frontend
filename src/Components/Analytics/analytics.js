@@ -17,6 +17,7 @@ import jwt_decode from "jwt-decode";
 import { createContext, useContext } from 'react';
 import Differential from './differential';
 import InfoBar from './infoBar';
+import BottomBar from './bottomBar'
 import AnalyticsGraph from './analyticsGraph';
 
 const Analytics = () => {
@@ -74,7 +75,7 @@ const Analytics = () => {
         }}>
           hello
         </Paper>
-        <Paper elevation={6} sx={{
+        <Paper elevation={3} sx={{
           gridArea: 'graph', 
           height: '55vh', 
           padding: 1,
@@ -82,9 +83,9 @@ const Analytics = () => {
         }}>
           <AnalyticsGraph userID={decodedToken}/>
         </Paper>
-        <Paper elevation={3} sx={{
+        <Paper elevation={0} sx={{
           gridArea: 'stocksInfo', 
-          height: '15vh', 
+          height: 'auto', 
           width: '65vw', 
           maxWidth: '95vw',
           overflowY: 'hidden',
@@ -94,9 +95,9 @@ const Analytics = () => {
           justifySelf: 'center', 
           alignItems: 'center', 
           justifyContent: 'center',
-          borderRadius: 6
+          borderRadius: 6,
         }}>
-            Hello
+          <BottomBar userID={decodedToken} />
         </Paper>
       </Box>
   )
