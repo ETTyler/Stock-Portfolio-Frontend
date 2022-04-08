@@ -29,7 +29,6 @@ const style = {
   borderRadius: '5%'
 };
 
-
 const SetColours = ({percentageChange}) => {
   if (percentageChange > 0) {
     return(
@@ -54,15 +53,13 @@ const Stock = ( { data, setIsUpdated } ) => {
   const originalValue = Number(data.shares*data.priceBought)
   const percentageChange = (((stockValue - originalValue) / originalValue) * 100).toFixed(2)
   const [open, setOpen] = useState(false);
-
   const handleOpen = () => {
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
   }
-
-
+  
   return (
     <Container maxWidth="sm">
       <View>

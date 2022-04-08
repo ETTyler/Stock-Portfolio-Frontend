@@ -19,6 +19,7 @@ import Differential from './differential';
 import InfoBar from './infoBar';
 import BottomBar from './bottomBar'
 import AnalyticsGraph from './analyticsGraph';
+import SideBar from './sideBar'
 
 const Analytics = () => {
   const token = localStorage.getItem('token')
@@ -61,19 +62,18 @@ const Analytics = () => {
         </Paper>
         <Paper elevation={3} sx={{
           gridArea: 'friends', 
-          height: '88vh', 
+          height: '82vh', 
           width: '25vw', 
-          maxWidth: '95vw',
           overflowY: 'hidden',
           overflowX: 'auto',
           display: 'flex', 
-          flexDirection: 'row', 
-          justifySelf: 'center', 
-          alignItems: 'center', 
-          justifyContent: 'center',
+          flexDirection: 'column', 
+          alignItems: 'flex-start', 
+          justifyContent: 'flex-start',
+          p: 4,
           borderRadius: 6
         }}>
-          hello
+          <SideBar userID={decodedToken} />
         </Paper>
         <Paper elevation={3} sx={{
           gridArea: 'graph', 
