@@ -40,7 +40,7 @@ const Statistics = () => {
       setStockData(res.data)
       setLoading(false)
     })
-  }, [])
+  }, [decodedToken.id])
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -75,7 +75,8 @@ const Statistics = () => {
           flexDirection: 'row', 
           justifySelf: 'center', 
           alignItems: 'center', 
-          justifyContent: 'center'
+          justifyContent: 'space-between',
+          gap: 2
         }}>
           {stockData.map((stock) => (
             <StockOverview key={stock.transactionID} stock={stock}/>

@@ -57,14 +57,14 @@ const Portfolio = () => {
       setLoading(false)
       setIsUpdated(false)
     }))
-  }, [isUpdated])
+  }, [decodedToken.id, isUpdated])
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Box sx={{ flexGrow: 1, mt: "2rem" }}>
+    <Box sx={{ flexGrow: 1, mt: "2rem", paddingBottom: 2 }}>
       <Grid container textAlign="center" >
         <Grid item xs={12}>
           <CenterBox>

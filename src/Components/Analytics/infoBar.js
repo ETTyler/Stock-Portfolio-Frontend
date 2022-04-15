@@ -32,12 +32,12 @@ const InfoBar = ({ userID }) => {
       setMarketNews(response.data)
       setLoading(false)
     })
-  },[])
+  },[id])
 
   return (
     <Paper elevation={3} sx={{
       width: '80%', 
-      height: '14vh',
+      height: 'auto',
       display: 'flex',
       flexDirection: 'column', 
       alignItems: 'flex-start',
@@ -56,7 +56,7 @@ const InfoBar = ({ userID }) => {
         { isLoading ? 'Loading...': marketNews.description}
       </Typography>
       <Typography variant='caption' component="div">
-        <a href={marketNews.url} target="_blank">{marketNews.url}</a>
+        <a href={marketNews.url} target="_blank" rel="noreferrer">{marketNews.url}</a>
       </Typography>
       </div>
     </Paper>

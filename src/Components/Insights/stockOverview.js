@@ -1,18 +1,10 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import { useState, useEffect } from 'react'; 
-import { grid } from '@mui/system';
-import { Paper } from '@mui/material';
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
 import { GraphContext } from './statistics';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -52,7 +44,7 @@ const StockOverview = ({ stock }) => {
     else {
       setTooltip('Show')
     }
-  }, [chosenGraph])
+  }, [chosenGraph, stock.Name])
   
   const handleClick = (event) => {
     event.preventDefault()
@@ -67,13 +59,13 @@ const StockOverview = ({ stock }) => {
   }
 
   return (
-    <div style={{padding: 10}}>
+    <div style={{padding: 1}}>
     <Tooltip title={tooltip+" "+stock.Name+" Graph"}>
-    <a href='#' onClick={handleClick} style={{textDecoration: 'none'}}>
-    <Card sx={{ display: 'flex', alignItems: 'center', width: '30vh', height: '16vh', borderRadius: 5}}>
+    <button onClick={handleClick} style={{all: 'unset', cursor: 'pointer'}}>
+    <Card sx={{ display: 'flex', alignItems: 'center', width: '16vw', height: '16vh', borderRadius: 5}}>
       <FlexStock>
       <CardContent sx={{ flex: '0 1 auto', display: 'flex'}}>
-      <img style={{borderRadius: 5}} src={`${stock.LogoURL}?size=31`}></img>
+      <img alt={stock.Name} style={{borderRadius: 5}} src={`${stock.LogoURL}?size=30`}></img>
         <Typography component="div" variant="h6">
           &nbsp;{stock.Name}
         </Typography>
@@ -98,10 +90,9 @@ const StockOverview = ({ stock }) => {
         </FlexStock>
       </CardContent>
       </Card>
-      </a>
+      </button>
       </Tooltip>
       </div>
-
   )
 }
 
