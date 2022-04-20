@@ -32,14 +32,15 @@ const style = {
   color: '#3f51b5',
   border: '1px solid rgba(63, 81, 181, 0.5)',
   minWidth: '64px',
-  height: '2.2rem',
+  height: '2.4rem',
   width: '100%',
   borderRadius: '4px',
   textTransform: 'uppercase',
   verticalAlign: 'middle',
   fontFamily: 'Inter',
   fontSize: '0.875rem',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  marginTop: '5%',
 }
 
 const BuyForm = ({ handleClose, setIsUpdated }) => {
@@ -101,37 +102,39 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
 
     return (
       <div>
-      <form onSubmit={handleSubmit} autocomplete="off">
+      <form onSubmit={handleSubmit} autoComplete="off">
         <Autocomplete
           id="stock"
           name="stock"
           label="stock"
           options={stocks}
-          renderInput={(params) => <TextField {...params} label="Stock" />}
-          style={{marginBottom: "5%"}}
+          renderInput={(params) => <TextField {...params} label="Stock" variant="outlined" required/>}
+          sx={{paddingTop: '5%'}}
           onChange={(event, value) => setStockName(value)}
         />
-        <TextField name="shares" label="Shares" variant="standard" fullWidth style={{marginBottom: "5%"}} />
-        <br/>
-        <FormGroup>
-          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange}/>} label="Use Current Price"/>
-          {!checked && (
-            <TextField name="price" label="Price Bought At" variant="standard" fullWidth style={{marginBottom: "5%"}} />
-          )}
-        </FormGroup>
-        <div style={{marginBottom: "5%"}}>
+        <div style={{marginTop: "5%"}}>
+          <TextField name="shares" label="Shares" variant="outlined" type="number" required fullWidth  />
+        </div>
+        <div style={{marginTop: "5%"}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
-            label="Date Bought"
+            label="Date"
             name="date"
             value={value}
+            fullWidth
             onChange={(newValue) => {
               setValue(newValue);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField {...params} variant="outlined" required />}
           />
         </LocalizationProvider>
         </div>
+        <FormGroup sx={{marginTop: "5%"}}>
+          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange} />} label="Use Current Price"/>
+          {!checked && (
+            <TextField name="price" label="Price" variant="outlined" type="number" fullWidth style={{marginTop: '5%'}} />
+          )}
+        </FormGroup>
         <input type="submit" value="Submit" style={style}/>
       </form>
       </div>

@@ -45,7 +45,7 @@ const Analytics = () => {
       >
         <Paper elevation={0} sx={{
           gridArea: 'infoBar', 
-          height: '15vh', 
+          height: 'auto', 
           width: '65vw', 
           maxWidth: '75vw',
           overflowY: 'hidden',
@@ -77,7 +77,7 @@ const Analytics = () => {
         </Paper>
         <Paper elevation={3} sx={{
           gridArea: 'graph', 
-          height: '55vh', 
+          height: 'auto', 
           padding: 1,
           borderRadius: 6
         }}>

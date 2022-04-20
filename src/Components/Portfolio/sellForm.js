@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from "axios";
 import { useState, useEffect } from 'react';
@@ -39,7 +39,8 @@ const style = {
   verticalAlign: 'middle',
   fontFamily: 'Inter',
   fontSize: '0.875rem',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  marginTop: '5%'
 }
 
 const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
@@ -94,31 +95,29 @@ const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
         .catch(err => console.log(err.data))
     }
   }
-  
     return (
       <div>
       <form onSubmit={handleSubmit} autocomplete="off">
-        <TextField name="shares" label="Shares Sold" variant="standard" fullWidth style={{marginBottom: "5%"}} />
-        <br/>
-        <FormGroup>
-          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange}/>} label="Use Current Price"/>
-          {!checked && (
-            <TextField name="price" label="Price Sold At" variant="standard" fullWidth style={{marginBottom: "5%"}} />
-          )}
-        </FormGroup>
-        <div style={{marginBottom: "5%"}}>
+        <TextField name="shares" label="Shares" variant="outlined" type="number" inputProps={{min: 1, max: Number(stockData.shares)}}fullWidth style={{marginTop: "5%"}} required/>
+        <div style={{marginTop: "5%"}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
-            label="Date Sold"
+            label="Date"
             name="date"
             value={date}
             onChange={(newValue) => {
               setDate(newValue);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField {...params} required/>}
           />
         </LocalizationProvider>
         </div>
+        <FormGroup style={{marginTop: "5%"}}>
+          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange} />} label="Use Current Price"/>
+          {!checked && (
+            <TextField name="price" label="Price" variant="outlined" type="number" fullWidth style={{marginTop: "5%"}} />
+          )}
+        </FormGroup>
         <input type="submit" value="Submit" style={style}/>
       </form>
       </div>

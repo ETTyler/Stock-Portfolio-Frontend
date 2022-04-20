@@ -33,18 +33,18 @@ const AnalyticsGraph = ({ userID }) => {
         setMarketGraph(response.data.marketDataset)
         setLoading(false)
       })
-  },[])
+  },[id])
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div style={{height: '50vh'}}>Loading...</div>;
   }
   
   const options = {
     chart: {
-      height: (6.7 / 16 * 100) + '%'
+      height: (6.1 / 16 * 100) + '%'
     },
     title: {
-        text: 'Percentage Change'
+        text: 'Portfolio Percentage Change'
       },
       series: [{
         name: 'Portfolio',

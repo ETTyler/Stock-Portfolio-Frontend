@@ -65,7 +65,7 @@ const Stock = ( { data, setIsUpdated } ) => {
       <View>
         <Card sx={{ display: 'flex', alignItems: 'center', p: 0, px: 0}}>
           <CardContent sx={{ flex: '0 1 auto', display: 'flex' }}>
-            <img style={{borderRadius: 8}} src={`${data.LogoURL}?size=45`}></img>
+            <img alt={data.Name} style={{borderRadius: 8}} src={`${data.LogoURL}?size=45`}></img>
           </CardContent>
           <CardContent sx={{ flex: '20 1 auto', display: 'flex', justifyItems: "flex-start"}}>
             <FlexStock>
@@ -98,7 +98,7 @@ const Stock = ( { data, setIsUpdated } ) => {
           >
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Sell Stock
+                Sell {data.Name}
               </Typography>
               <SellForm stockData={data} handleClose={handleClose} setIsUpdated={setIsUpdated}/>
             </Box>
