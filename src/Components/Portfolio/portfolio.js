@@ -72,7 +72,7 @@ const Portfolio = () => {
           </CenterBox>
         </Grid>
         <Grid item xs={12} sx={{ mt: "1rem" }}>
-          <Button onClick={handleOpen} size="medium" variant="outlined" startIcon={<AddIcon />}>New Purchase</Button>
+          <Button onClick={handleOpen} size="medium" variant="outlined" startIcon={<AddIcon />}>Purchase</Button>
           <Modal
             open={open}
             onClose={handleClose}
