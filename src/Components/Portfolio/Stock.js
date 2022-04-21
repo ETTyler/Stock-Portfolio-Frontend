@@ -72,7 +72,7 @@ const Stock = ( { data, setIsUpdated } ) => {
               <Typography component="div" variant="h6">
                 {data.Name} 
               </Typography>
-              <Typography component="div" variant="body">
+              <Typography component="div" variant="body" sx={{color: '#1976d2'}}>
                 ${data.ticker} - {data.shares} Shares
               </Typography>
             </FlexStock>
@@ -97,7 +97,7 @@ const Stock = ( { data, setIsUpdated } ) => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography id="modal-modal-title" variant="h6" component="h6" sx={{color: '#1976d2'}}>
                 Sell {data.Name}
               </Typography>
               <SellForm stockData={data} handleClose={handleClose} setIsUpdated={setIsUpdated}/>

@@ -47,10 +47,16 @@ const Portfolio = () => {
   const token = localStorage.getItem('token')
   const decodedToken = jwt_decode(token)
 
+  const config = {
+    headers: {
+      Authorization: token
+    }
+  }
+
   useEffect(() => {
     axios.all([
       axios.get(`http://localhost:3001/api/stocks/update/${decodedToken.id}`),
-      axios.get(`http://localhost:3001/api/stocks/info/${decodedToken.id}`)
+      axios.get(`http://localhost:3001/api/stocks/information`, config)
     ])
     .then(axios.spread((res1, res2) => {
       setStockData(res2.data)
@@ -80,8 +86,8 @@ const Portfolio = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Add New Stock Purchase
+              <Typography id="modal-modal-title" variant="h6" component="div" sx={{color: '#1976d2'}}>
+                New Purchase
               </Typography>
               <BuyForm handleClose={handleClose} setIsUpdated={setIsUpdated}/>
             </Box>

@@ -55,7 +55,7 @@ const StatsCharts = ({ userID }) => {
       .then(response => {
         setData(response.data)
       })
-  },[])
+  },[id])
   
   const sectorOptions = {
     chart: {
@@ -159,7 +159,7 @@ const StatsCharts = ({ userID }) => {
 
   return (
     <Investments>
-      <Typography variant="h6" component="div">
+      <Typography variant="h6" component="div" sx={{color: '#1976d2'}}>
         Investments By
       </Typography>
       <Box sx={{p: 1}}>

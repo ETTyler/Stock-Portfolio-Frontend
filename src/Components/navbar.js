@@ -190,7 +190,7 @@ const Navbar = ({ username }) => {
                   <ListItemIcon>
                     {setting[2]}
                   </ListItemIcon>
-                  <Typography textAlign="center">{setting[0]}</Typography>
+                  <Typography textAlign="center" sx={{color: '#1976d2'}}>{setting[0]}</Typography>
                 </MenuItem>
               ))}
             </Menu>

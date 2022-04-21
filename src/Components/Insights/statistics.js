@@ -32,15 +32,21 @@ const Statistics = () => {
 
   const token = localStorage.getItem('token')
   const decodedToken = jwt_decode(token)
+  
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     axios
-    .get(`http://localhost:3001/api/stocks/info/${decodedToken.id}`)
+    .get(`http://localhost:3001/api/stocks/information`, config)
     .then(res => {
       setStockData(res.data)
       setLoading(false)
     })
-  }, [decodedToken.id])
+  }, [token])
 
   if (isLoading) {
     return <div>Loading...</div>;
