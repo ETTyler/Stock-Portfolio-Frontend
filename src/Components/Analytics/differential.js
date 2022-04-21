@@ -46,10 +46,16 @@ const Differential = ({ userID }) => {
   const id = userID.id
   const [differential, setDifferential] = useState(0)
   const [isLoading, setLoading] = useState(true)
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     axios
-    .get(`http://localhost:3001/api/stocks/differential/${id}`)
+    .get(`http://localhost:3001/api/stocks/differential`, config)
     .catch(error => {
       console.log(error.toJSON());
     })
@@ -57,7 +63,7 @@ const Differential = ({ userID }) => {
       setDifferential(response.data.differential)
       setLoading(false)
     })
-  },[])
+  },[token])
 
   return (
     <Paper elevation={3} sx={{

@@ -21,13 +21,18 @@ import { useContext, createContext } from 'react';
 const StatsGraph = ({ userID }) => {
   const [graphData, setGraphData] = useState([])
   const { chosenGraph, setChosenGraph } = useContext(GraphContext)
-  const id = userID.id
   const [isLoading, setLoading] = useState(true)
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     if (chosenGraph !== "Portfolio") {
       axios
-      .get(`http://localhost:3001/api/stocks/graph/${chosenGraph}/${id}`)
+      .get(`http://localhost:3001/api/stocks/graph/${chosenGraph}`, config)
       .catch(error => {
         console.log(error.toJSON());
      })
@@ -38,7 +43,7 @@ const StatsGraph = ({ userID }) => {
     }
     else {
       axios
-      .get(`http://localhost:3001/api/stocks/history/${id}`)
+      .get(`http://localhost:3001/api/stocks/history`, config)
       .catch(error => {
         console.log(error.toJSON());
       })
@@ -47,7 +52,7 @@ const StatsGraph = ({ userID }) => {
         setLoading(false)
       })
     }
-  },[chosenGraph, id])
+  },[chosenGraph, token])
 
   if (isLoading) {
     return <div>Loading...</div>;

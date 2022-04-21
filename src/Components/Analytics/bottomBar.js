@@ -21,11 +21,16 @@ const BottomBar = ({ userID }) => {
   const [stockData, setStockData] = useState({})
   const [highestValue, setHighestValue] = useState(0)
   const [lowestValue, setLowestValue] = useState(0)
-  const id = userID.id
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     axios
-    .get(`http://localhost:3001/api/stocks/analytics/stockinfo/${id}`)
+    .get(`http://localhost:3001/api/stocks/analytics/stockinfo`, config)
     .catch(error => {
       console.log(error.toJSON());
     })
@@ -36,7 +41,7 @@ const BottomBar = ({ userID }) => {
       setLowestValue(Number(response.data.lowestStockData.value))
       setLoading(false)
     })
-  },[])
+  },[token])
 
   if(isLoading) {
     return <div>Loading...</div>;

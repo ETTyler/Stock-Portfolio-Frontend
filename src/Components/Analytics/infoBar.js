@@ -19,12 +19,17 @@ import { createContext, useContext } from 'react';
 const InfoBar = ({ userID }) => {
   const [marketNews, setMarketNews] = useState({})
   const [isLoading, setLoading] = useState(true)
-  const id = userID.id
   const date = new Date()
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     axios
-    .get(`http://localhost:3001/api/stocks/news/${id}`)
+    .get(`http://localhost:3001/api/stocks/news`, config)
     .catch(error => {
       console.log(error.toJSON());
     })
@@ -32,7 +37,7 @@ const InfoBar = ({ userID }) => {
       setMarketNews(response.data)
       setLoading(false)
     })
-  },[id])
+  },[token])
 
   return (
     <Paper elevation={3} sx={{

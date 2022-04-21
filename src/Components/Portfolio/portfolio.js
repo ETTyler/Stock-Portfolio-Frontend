@@ -45,17 +45,15 @@ const Portfolio = () => {
   }
 
   const token = localStorage.getItem('token')
-  const decodedToken = jwt_decode(token)
-
-  const config = {
-    headers: {
-      Authorization: token
-    }
-  }
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     axios.all([
-      axios.get(`http://localhost:3001/api/stocks/update/${decodedToken.id}`),
+      axios.get(`http://localhost:3001/api/stocks/update`, config),
       axios.get(`http://localhost:3001/api/stocks/information`, config)
     ])
     .then(axios.spread((res1, res2) => {
@@ -63,7 +61,7 @@ const Portfolio = () => {
       setLoading(false)
       setIsUpdated(false)
     }))
-  }, [decodedToken.id, isUpdated])
+  }, [isUpdated, token])
 
   if (isLoading) {
     return <div>Loading...</div>;

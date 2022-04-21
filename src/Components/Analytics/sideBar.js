@@ -27,11 +27,16 @@ const SideBar = ({ userID }) => {
   const [dateFriends, setDateFriends] = useState()
   const [isLoading, setLoading] = useState(true)
   const [value, setValue] = useState(null)
-  const id = userID.id
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     axios
-    .get(`http://localhost:3001/api/stocks/analytics/friends/${id}`)
+    .get(`http://localhost:3001/api/stocks/analytics/friends`, config)
     .catch(error => {
       console.log(error.toJSON());
     })
@@ -40,12 +45,17 @@ const SideBar = ({ userID }) => {
       setDateFriends(response.data)
       setLoading(false)
     })
-  },[])
+  },[token])
 
   const dateChange = (value) => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     const date = new Date(value).toISOString().split('T')[0]
     axios
-    .get(`http://localhost:3001/api/stocks/analytics/friends/${date}/${id}`)
+    .get(`http://localhost:3001/api/stocks/analytics/friends/${date}`, config)
     .catch(error => {
       console.log(error.toJSON());
     })

@@ -44,18 +44,23 @@ function TabPanel(props) {
 const StatsCharts = ({ userID }) => {
   const [value, setValue] = useState(0);
   const [data, setData] = useState([])
-  const id = userID.id
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
     axios
-      .get(`http://localhost:3001/api/stocks/insights/${id}`)
+      .get(`http://localhost:3001/api/stocks/insights`, config)
       .catch(error => {
         console.log(error.toJSON());
       })
       .then(response => {
         setData(response.data)
       })
-  },[id])
+  },[token])
   
   const sectorOptions = {
     chart: {

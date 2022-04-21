@@ -21,10 +21,16 @@ const AnalyticsGraph = ({ userID }) => {
   const [marketGraph, setMarketGraph] = useState([])
   const id = userID.id
   const [isLoading, setLoading] = useState(true)
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
-      axios
-      .get(`http://localhost:3001/api/stocks/analytics/graph/${id}`)
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
+    axios
+      .get(`http://localhost:3001/api/stocks/analytics/graph`, config)
       .catch(error => {
         console.log(error.toJSON());
       })
@@ -33,7 +39,7 @@ const AnalyticsGraph = ({ userID }) => {
         setMarketGraph(response.data.marketDataset)
         setLoading(false)
       })
-  },[id])
+  },[token])
 
   if (isLoading) {
     return <div style={{height: '50vh'}}>Loading...</div>;
