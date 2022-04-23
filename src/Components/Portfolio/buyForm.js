@@ -47,10 +47,15 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
   const [stocks, setStocks] = useState([])
   const [value, setValue] = useState(null)
   const [stockName, setStockName] = useState([])
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false)
+  const [checked2, setChecked2] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
+  }
+
+  const handleChange2 = (event) => {
+    setChecked2(event.target.checked);
   }
   
   useEffect(() => {
@@ -72,8 +77,23 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
       const userData = {
         userID: decodedToken.id,
         ticker: stockName.ticker,
+        date: new Date(),
+        price: 'current',
+        shares: data.get('shares')
+      }
+      axios.post(url, userData)
+      .then(res => { 
+        handleClose()
+        setIsUpdated(true)
+      })
+      .catch(err => console.log(err.data))
+    }
+    else if (checked2) {
+      const userData = {
+        userID: decodedToken.id,
+        ticker: stockName.ticker,
         date: value,
-        price: false,
+        price: 'historical',
         shares: data.get('shares')
       }
       axios.post(url, userData)
@@ -115,24 +135,28 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
         <div style={{marginTop: "5%"}}>
           <TextField name="shares" label="Shares" variant="outlined" type="number" required fullWidth  />
         </div>
-        <div style={{marginTop: "5%"}}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="Date"
-            name="date"
-            value={value}
-            fullWidth
-            onChange={(newValue) => {
-              setValue(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} variant="outlined" required />}
-          />
-        </LocalizationProvider>
-        </div>
         <FormGroup sx={{marginTop: "5%"}}>
-          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange} />} label="Use Current Price"/>
+          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange} />} label="Use Current Price and Date"/>
           {!checked && (
-            <TextField name="price" label="Price" variant="outlined" type="number" fullWidth style={{marginTop: '5%'}} />
+            <>
+            <div style={{ marginTop: "5%" }}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Date"
+                  name="date"
+                  value={value}
+                  fullWidth
+                  onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} variant="outlined" required />} />
+              </LocalizationProvider>
+              <FormControlLabel control={<Checkbox checked={checked2} onChange={handleChange2} />} label="Use Price on Date Selected" sx={{ marginTop: '5%' }}/>
+              {!checked2 && (
+                <TextField name="price" label="Price" variant="outlined" type="number" fullWidth style={{ marginTop: '5%' }} />
+              )}
+            </div>
+            </>
           )}
         </FormGroup>
         <input type="submit" value="Submit" style={style}/>

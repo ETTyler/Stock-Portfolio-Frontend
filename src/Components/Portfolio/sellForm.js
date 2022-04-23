@@ -97,7 +97,7 @@ const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
   }
     return (
       <div>
-      <form onSubmit={handleSubmit} autocomplete="off">
+      <form onSubmit={handleSubmit} autoComplete="off">
         <TextField name="shares" label="Shares" variant="outlined" type="number" inputProps={{min: 1, max: Number(stockData.shares)}}fullWidth style={{marginTop: "5%"}} required/>
         <div style={{marginTop: "5%"}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>

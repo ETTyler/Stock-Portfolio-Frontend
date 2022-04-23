@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 const theme = createTheme();
 
 export default function SignIn() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [invalidDetails, setInvalidDetails] = useState(false)
  
   if (isLoggedIn) {
@@ -60,7 +60,7 @@ export default function SignIn() {
         }
       })
       .catch(err => console.log(err.data))
-  };
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -133,5 +133,5 @@ export default function SignIn() {
         </Box>
       </Container>
     </ThemeProvider>
-  );
+  )
 }
