@@ -45,19 +45,20 @@ const style = {
 
 const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
   const [date, setDate] = useState(null)
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false)
 
   const handleChange = (event) => {
-    setChecked(event.target.checked);
+    setChecked(event.target.checked)
   }
   
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    let userData
 
     const url = `http://localhost:3001/api/sale/new`
     if (checked) {
-      const userData = {
+      userData = {
         transactionID: stockData.transactionID,
         saleDate: date,
         salePrice: false,
@@ -67,16 +68,9 @@ const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
         ticker: stockData.ticker,
         userID: stockData.userID
       }
-      axios.post(url, userData)
-        .then(res => { 
-          console.log(res)
-          setIsUpdated(true)
-          handleClose()
-        })
-        .catch(err => console.log(err.data))
     }
     else {
-      const userData = {
+      userData = {
         transactionID: stockData.transactionID,
         saleDate: date,
         salePrice: data.get('price'),
@@ -86,14 +80,14 @@ const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
         ticker: stockData.ticker,
         userID: stockData.userID
       }
-      axios.post(url, userData)
-        .then(res => { 
-          console.log(res)
-          setIsUpdated(true)
-          handleClose()
-        })
-        .catch(err => console.log(err.data))
     }
+    axios.post(url, userData)
+    .then(res => { 
+      console.log(res)
+      setIsUpdated(true)
+      handleClose()
+    })
+    .catch(err => console.log(err.data))
   }
     return (
       <div>

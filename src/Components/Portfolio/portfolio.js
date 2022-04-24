@@ -35,7 +35,7 @@ const Portfolio = () => {
   const [stockData, setStockData] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [isUpdated, setIsUpdated] = useState(false)
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   
   const handleOpen = () => {
     setOpen(true)
@@ -45,7 +45,6 @@ const Portfolio = () => {
   }
 
   const token = localStorage.getItem('token')
-
   useEffect(() => {
     const config = {
       headers: {
