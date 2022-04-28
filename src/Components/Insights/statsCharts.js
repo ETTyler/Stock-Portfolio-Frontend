@@ -41,7 +41,7 @@ function TabPanel(props) {
 }
 
 
-const StatsCharts = ({ userID }) => {
+const StatsCharts = () => {
   const [value, setValue] = useState(0);
   const [data, setData] = useState([])
   const token = localStorage.getItem('token')

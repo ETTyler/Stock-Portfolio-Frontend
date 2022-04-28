@@ -18,6 +18,7 @@ import jwt_decode from "jwt-decode";
 import StatsGraph from './statsGraph';
 import StatsCharts from './statsCharts';
 import { createContext, useContext } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const GraphContext = React.createContext({
   chosenGraph: 'Portfolio',
@@ -29,10 +30,7 @@ const Statistics = () => {
   const [isLoading, setLoading] = useState(true)
   const [chosenGraph, setChosenGraph] = useState('Portfolio')
   const value = { chosenGraph, setChosenGraph }
-
-  const token = localStorage.getItem('token')
-  const decodedToken = jwt_decode(token)
-  
+  const token = localStorage.getItem('token')  
 
   useEffect(() => {
     const config = {
@@ -49,7 +47,11 @@ const Statistics = () => {
   }, [token])
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', height: '90vh', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    )
   }
   
   return (
@@ -90,10 +92,10 @@ const Statistics = () => {
         </Paper>
         <Paper elevation={6} sx={{
           gridArea: 'graph', height: '65vh', padding: 1, borderRadius: 5, width: '60vw'}}>
-          <StatsGraph userID={decodedToken}/>
+          <StatsGraph />
         </Paper>
         <Paper elevation={6} sx={{gridArea: 'charts', borderRadius: 5, width: 'fit-content'}}>
-          <StatsCharts userID={decodedToken}/>
+          <StatsCharts />
         </Paper>
       </Box>
     </GraphContext.Provider>

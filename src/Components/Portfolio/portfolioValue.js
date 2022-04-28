@@ -14,7 +14,7 @@ import { useState } from 'react';
 
 const SetColours = ({portfolioDifference, portfolioValue}) => {
   if (portfolioDifference > 0) {
-    return(
+    return (
       <>
         <Typography variant="h3">
           {portfolioValue.toLocaleString('en-US', {

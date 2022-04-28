@@ -13,6 +13,7 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link, useLocation
 } from "react-router-dom"
+import Profile from './Components/Profile/profile';
 
 let theme = createTheme({
   typography: {
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/portfolio" element={<Portfolio />}/>
         <Route path="/insights" element={<Statistics />}/>
         <Route path="/analytics" element={<Analytics />}/>
+        <Route path="/profile" element={<Profile />}/>
       </Routes>
     </ThemeProvider>
   )

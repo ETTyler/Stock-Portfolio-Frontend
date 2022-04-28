@@ -17,10 +17,11 @@ import HighchartsReact from 'highcharts-react-official'
 import axios from 'axios';
 import { GraphContext } from './statistics';
 import { useContext, createContext } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const StatsGraph = ({ userID }) => {
+const StatsGraph = () => {
   const [graphData, setGraphData] = useState([])
-  const { chosenGraph, setChosenGraph } = useContext(GraphContext)
+  const { chosenGraph } = useContext(GraphContext)
   const [isLoading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
 
@@ -55,7 +56,11 @@ const StatsGraph = ({ userID }) => {
   },[chosenGraph, token])
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Box sx={{ display: 'flex', height: '60vh', alignItems: 'center', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    )
   }
   
   const options = {

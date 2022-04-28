@@ -22,9 +22,6 @@ import AnalyticsGraph from './analyticsGraph';
 import SideBar from './sideBar'
 
 const Analytics = () => {
-  const token = localStorage.getItem('token')
-  const decodedToken = jwt_decode(token)
-
   return (
       <Box 
         sx={{ 
@@ -46,7 +43,7 @@ const Analytics = () => {
         <Paper elevation={0} sx={{
           gridArea: 'infoBar', 
           height: 'auto', 
-          width: '65vw', 
+          width: '68vw', 
           maxWidth: '75vw',
           overflowY: 'hidden',
           overflowX: 'auto',
@@ -57,13 +54,13 @@ const Analytics = () => {
           justifyContent: 'center',
           gap: '1vw'
         }}>
-          <InfoBar userID={decodedToken} />
-          <Differential userID={decodedToken}/>
+          <InfoBar />
+          <Differential />
         </Paper>
         <Paper elevation={3} sx={{
           gridArea: 'friends', 
           height: '82vh', 
-          width: '25vw', 
+          width: '20vw', 
           overflowY: 'hidden',
           overflowX: 'auto',
           display: 'flex', 
@@ -73,7 +70,7 @@ const Analytics = () => {
           p: 4,
           borderRadius: 6
         }}>
-          <SideBar userID={decodedToken} />
+          <SideBar />
         </Paper>
         <Paper elevation={3} sx={{
           gridArea: 'graph', 
@@ -81,12 +78,12 @@ const Analytics = () => {
           padding: 1,
           borderRadius: 6
         }}>
-          <AnalyticsGraph userID={decodedToken}/>
+          <AnalyticsGraph />
         </Paper>
         <Paper elevation={0} sx={{
           gridArea: 'stocksInfo', 
           height: 'auto', 
-          width: '65vw', 
+          width: '68vw', 
           maxWidth: '95vw',
           overflowY: 'hidden',
           overflowX: 'auto',
@@ -97,7 +94,7 @@ const Analytics = () => {
           justifyContent: 'center',
           borderRadius: 6,
         }}>
-          <BottomBar userID={decodedToken} />
+          <BottomBar />
         </Paper>
       </Box>
   )

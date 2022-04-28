@@ -22,7 +22,7 @@ import jwt_decode from "jwt-decode";
 import { createContext, useContext } from 'react';
 import Friend from './friend';
 
-const SideBar = ({ userID }) => {
+const SideBar = () => {
   const [friends, setFriends] = useState()
   const [dateFriends, setDateFriends] = useState()
   const [isLoading, setLoading] = useState(true)
@@ -81,7 +81,7 @@ const SideBar = ({ userID }) => {
       <Typography variant="h6" component="div">
         All Time
       </Typography>
-      <div style={{height: 'auto', maxHeight:'33vh', overflowY:'auto', width: '25vw', paddingBottom: '5%'}}>
+      <div style={{height: 'auto', maxHeight:'33vh', overflowY:'auto', width: '20vw', paddingBottom: '5%'}}>
         {friends.map((friend) => (
           <Friend key={friend.name} data={friend} />
         ))}
@@ -104,7 +104,7 @@ const SideBar = ({ userID }) => {
           />
         </LocalizationProvider>
       </div>
-      <div style={{height: 'auto', maxHeight:'33vh', overflowY:'auto', width: '25vw'}}>
+      <div style={{height: 'auto', maxHeight:'33vh', overflowY:'auto', width: '20vw'}}>
         {dateFriends.map((friend) => (
           <Friend key={friend.name} data={friend} />
         ))}  

@@ -15,6 +15,7 @@ import { Paper } from '@mui/material';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { createContext, useContext } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const SetColours = ({ differential }) => {
   if (differential > 0) {
@@ -42,8 +43,7 @@ const SetColours = ({ differential }) => {
 }
 
 
-const Differential = ({ userID }) => {
-  const id = userID.id
+const Differential = () => {
   const [differential, setDifferential] = useState(0)
   const [isLoading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
@@ -76,7 +76,7 @@ const Differential = ({ userID }) => {
       justifyContent: 'center',
       borderRadius: 6
     }}>
-      {isLoading ? 'Loading...': <SetColours differential={differential} />}
+      {isLoading ? <CircularProgress /> : <SetColours differential={differential} />}
     </Paper>
   )
 }

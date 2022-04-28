@@ -15,11 +15,11 @@ import { Paper } from '@mui/material';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official'
 import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const AnalyticsGraph = ({ userID }) => {
+const AnalyticsGraph = () => {
   const [userGraph, setUserGraph] = useState([])
   const [marketGraph, setMarketGraph] = useState([])
-  const id = userID.id
   const [isLoading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
 
@@ -42,7 +42,11 @@ const AnalyticsGraph = ({ userID }) => {
   },[token])
 
   if (isLoading) {
-    return <div style={{height: '50vh'}}>Loading...</div>;
+    return (
+      <Box sx={{ display: 'flex', height: '50vh', alignItems: 'center', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    )
   }
   
   const options = {

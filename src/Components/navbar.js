@@ -96,7 +96,7 @@ const Navbar = ({ username }) => {
   };
 
   return (
-    <AppBar position="static" sx={{boxSizing: 'border-box'}}>
+    <AppBar position="sticky" sx={{boxSizing: 'border-box', width: 'max'}}>
       <Container maxWidth="1">
         <Toolbar disableGutters>          
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

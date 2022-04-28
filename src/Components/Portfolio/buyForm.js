@@ -71,53 +71,42 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
     const data = new FormData(event.currentTarget);
     const token = localStorage.getItem('token')
     const decodedToken = jwt_decode(token)
+    let userData
 
     const url = `http://localhost:3001/api/purchases/new/`
     if (checked) {
-      const userData = {
+      userData = {
         userID: decodedToken.id,
         ticker: stockName.ticker,
         date: new Date(),
         price: 'current',
         shares: data.get('shares')
       }
-      axios.post(url, userData)
-      .then(res => { 
-        handleClose()
-        setIsUpdated(true)
-      })
-      .catch(err => console.log(err.data))
     }
     else if (checked2) {
-      const userData = {
+      userData = {
         userID: decodedToken.id,
         ticker: stockName.ticker,
         date: value,
         price: 'historical',
         shares: data.get('shares')
       }
-      axios.post(url, userData)
-      .then(res => { 
-        handleClose()
-        setIsUpdated(true)
-      })
-      .catch(err => console.log(err.data))
     }
     else {
-      const userData = {
+      userData = {
         userID: decodedToken.id,
         ticker: stockName.ticker,
         date: value,
         price: data.get('price'),
         shares: data.get('shares')
       }
-      axios.post(url, userData)
-      .then(res => { 
-        handleClose()
-        setIsUpdated(true)
-      })
-      .catch(err => console.log(err.data))
     }
+    axios.post(url, userData)
+    .then(res => { 
+      setIsUpdated(true)
+      handleClose()
+    })
+    .catch(err => console.log(err.data))
   }
 
     return (

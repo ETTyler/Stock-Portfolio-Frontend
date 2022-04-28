@@ -16,7 +16,7 @@ import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { createContext, useContext } from 'react';
 
-const InfoBar = ({ userID }) => {
+const InfoBar = () => {
   const [marketNews, setMarketNews] = useState({})
   const [isLoading, setLoading] = useState(true)
   const date = new Date()

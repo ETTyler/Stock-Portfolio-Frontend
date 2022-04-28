@@ -17,6 +17,7 @@ import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import Modal from '@mui/material/Modal';
 import BuyForm from './buyForm';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const style = {
   position: 'absolute',
@@ -51,19 +52,23 @@ const Portfolio = () => {
         Authorization: token
       }
     }
-    axios.all([
-      axios.get(`http://localhost:3001/api/stocks/update`, config),
+    axios.get(`http://localhost:3001/api/stocks/update`, config)
+    .then(res => {
       axios.get(`http://localhost:3001/api/stocks/information`, config)
-    ])
-    .then(axios.spread((res1, res2) => {
-      setStockData(res2.data)
-      setLoading(false)
-      setIsUpdated(false)
-    }))
+      .then(res => {
+        setStockData(res.data)
+        setLoading(false)
+        setIsUpdated(false)
+      })
+    })
   }, [isUpdated, token])
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', height: '90vh', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    )
   }
 
   return (
