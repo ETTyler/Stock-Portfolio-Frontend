@@ -1,22 +1,8 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -60,7 +46,7 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
   
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/stocks/info`)
+      .get(`/api/stocks/info`)
       .then(response => {
         setStocks(response.data)
       })
@@ -73,7 +59,7 @@ const BuyForm = ({ handleClose, setIsUpdated }) => {
     const decodedToken = jwt_decode(token)
     let userData
 
-    const url = `http://localhost:3001/api/purchases/new/`
+    const url = `/api/purchases/new/`
     if (checked) {
       userData = {
         userID: decodedToken.id,

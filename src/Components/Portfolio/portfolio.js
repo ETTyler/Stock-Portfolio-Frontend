@@ -2,19 +2,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import { useState, useEffect } from 'react';
 import PortfolioValue from './portfolioValue';
 import Stock from './Stock';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
-import jwt_decode from "jwt-decode";
 import Modal from '@mui/material/Modal';
 import BuyForm from './buyForm';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -52,9 +46,9 @@ const Portfolio = () => {
         Authorization: token
       }
     }
-    axios.get(`http://localhost:3001/api/stocks/update`, config)
+    axios.get(`/api/stocks/update`, config)
     .then(res => {
-      axios.get(`http://localhost:3001/api/stocks/information`, config)
+      axios.get(`/api/stocks/information`, config)
       .then(res => {
         setStockData(res.data)
         setLoading(false)

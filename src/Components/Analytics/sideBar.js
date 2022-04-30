@@ -1,25 +1,11 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import styled from 'styled-components'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
-import Avatar from '@mui/material/Avatar';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TextField from '@material-ui/core/TextField';
 import { useState, useEffect } from 'react'; 
-import { grid } from '@mui/system';
-import { Paper } from '@mui/material';
 import axios from 'axios';
-import jwt_decode from "jwt-decode";
-import { createContext, useContext } from 'react';
 import Friend from './friend';
 
 const SideBar = () => {
@@ -36,7 +22,7 @@ const SideBar = () => {
       }
     }
     axios
-    .get(`http://localhost:3001/api/stocks/analytics/friends`, config)
+    .get(`/api/stocks/analytics/friends`, config)
     .catch(error => {
       console.log(error.toJSON());
     })
@@ -55,7 +41,7 @@ const SideBar = () => {
     }
     const date = new Date(value).toISOString().split('T')[0]
     axios
-    .get(`http://localhost:3001/api/stocks/analytics/friends/${date}`, config)
+    .get(`/api/stocks/analytics/friends/${date}`, config)
     .catch(error => {
       console.log(error.toJSON());
     })

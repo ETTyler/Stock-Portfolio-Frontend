@@ -1,22 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import styled from 'styled-components'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import { useState, useEffect } from 'react'; 
-import { grid, style } from '@mui/system';
-import { Paper } from '@mui/material';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official'
 import axios from 'axios';
 import { GraphContext } from './statistics';
-import { useContext, createContext } from 'react';
+import { useContext } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const StatsGraph = () => {
@@ -33,7 +22,7 @@ const StatsGraph = () => {
     }
     if (chosenGraph !== "Portfolio") {
       axios
-      .get(`http://localhost:3001/api/stocks/graph/${chosenGraph}`, config)
+      .get(`/api/stocks/graph/${chosenGraph}`, config)
       .catch(error => {
         console.log(error.toJSON());
      })
@@ -44,7 +33,7 @@ const StatsGraph = () => {
     }
     else {
       axios
-      .get(`http://localhost:3001/api/stocks/history`, config)
+      .get(`/api/stocks/history`, config)
       .catch(error => {
         console.log(error.toJSON());
       })

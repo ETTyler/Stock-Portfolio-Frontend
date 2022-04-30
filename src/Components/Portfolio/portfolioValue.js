@@ -1,16 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import styled from 'styled-components'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
-import { useState } from 'react';
 
 const SetColours = ({portfolioDifference, portfolioValue}) => {
   if (portfolioDifference > 0) {

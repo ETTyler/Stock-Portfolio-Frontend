@@ -1,20 +1,6 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import styled from 'styled-components'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
-import { useState, useEffect} from 'react';
-import Container from '@mui/material/Container';
-import ContactlessSharpIcon from '@mui/icons-material/ContactlessSharp';
-import axios from 'axios';
-import Modal from '@mui/material/Modal';
 
 const SetColours = ({percent}) => {
   if (percent > 0) {

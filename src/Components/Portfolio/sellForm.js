@@ -1,29 +1,13 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import axios from "axios";
-import { useState, useEffect } from 'react';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import jwt_decode from "jwt-decode";
 
 const style = {
   position: 'relative',
@@ -56,7 +40,7 @@ const SellForm = ( {stockData, handleClose, setIsUpdated} ) => {
     const data = new FormData(event.currentTarget)
     let userData
 
-    const url = `http://localhost:3001/api/sale/new`
+    const url = `/api/sale/new`
     if (checked) {
       userData = {
         transactionID: stockData.transactionID,

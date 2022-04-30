@@ -14,11 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const theme = createTheme();
 
@@ -44,7 +42,7 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const url = 'http://localhost:3001/api/users/login'
+    const url = '/api/users/login'
     const userData = {
       email: data.get('email'),
       password: data.get('password'),
