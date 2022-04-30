@@ -27,7 +27,7 @@ const Statistics = () => {
       }
     }
     axios
-    .get(`http://localhost:3001/api/stocks/information`, config)
+    .get(`/api/stocks/information`, config)
     .then(res => {
       setStockData(res.data)
       setLoading(false)
