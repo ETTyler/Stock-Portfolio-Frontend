@@ -14,7 +14,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useState, useEffect } from 'react';
 import {
-  BrowserRouter as Link, useLocation
+  BrowserRouter as Router,
+  Routes, Route, Link, useLocation
 } from "react-router-dom"
 import PersonIcon from '@mui/icons-material/Person';
 import ListItemIcon from '@mui/material/ListItemIcon';

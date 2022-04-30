@@ -7,7 +7,7 @@ import Portfolio from './Components/Portfolio/portfolio';
 import Statistics from './Components/Insights/statistics';
 import Analytics from './Components/Analytics/analytics';
 import {
-  BrowserRouter as
+  BrowserRouter as Router,
   Routes, Route, useLocation
 } from "react-router-dom"
 import Profile from './Components/Profile/profile';
