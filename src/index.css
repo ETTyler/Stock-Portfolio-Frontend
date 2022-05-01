@@ -13,11 +13,6 @@ code {
     monospace;
 }
 
-html {
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
 body, #root {
   height: 100%;
   width: 100%;

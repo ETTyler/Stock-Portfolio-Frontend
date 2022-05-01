@@ -88,7 +88,6 @@ const Statistics = () => {
       </Box>
     </GraphContext.Provider>
   )
-
 }
 
 export default Statistics;
